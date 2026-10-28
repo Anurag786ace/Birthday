@@ -1,122 +1,152 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+import { useState, useRef, useEffect } from 'react';
+import './App.css';
+
+import ConfettiCanvas from './components/ConfettiCanvas';
+import FloatingHearts from './components/FloatingHearts';
+import ChapterNav from './components/ChapterNav';
+import Chapter1Intro from './components/Chapter1Intro';
+import Chapter2NurseTribute from './components/Chapter2NurseTribute';
+import Chapter3Candle from './components/Chapter3Candle';
+import Chapter4CakeCut from './components/Chapter4CakeCut';
+import Chapter5Wishes from './components/Chapter5Wishes';
+
+import {
+  startBdayMusic,
+  stopBdayMusic,
+  toggleBdayMusic,
+  isMusicPlaying,
+  playSparkleSound,
+} from './utils/audio';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [currentChapter, setCurrentChapter] = useState(1);
+  const [musicActive, setMusicActive] = useState(false);
+  const confettiRef = useRef(null);
+
+  const chapterTitles = [
+    'The Origin',
+    'Nurse’s Tribute',
+    'Candle & Wish',
+    'Cake Cutting',
+    'Wishes & Gifts',
+  ];
+
+  const handleNext = () => {
+    playSparkleSound();
+    setCurrentChapter((prev) => Math.min(prev + 1, 5));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handlePrev = () => {
+    playSparkleSound();
+    setCurrentChapter((prev) => Math.max(prev - 1, 1));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleRestart = () => {
+    playSparkleSound();
+    setCurrentChapter(1);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleToggleMusic = () => {
+    toggleBdayMusic((state) => {
+      setMusicActive(state);
+    });
+  };
+
+  const handleStartMusic = () => {
+    startBdayMusic((state) => {
+      setMusicActive(state);
+    });
+  };
+
+  const triggerConfetti = (x, y, count) => {
+    if (confettiRef.current) {
+      confettiRef.current.burst(x, y, count);
+    }
+  };
+
+  const triggerRain = (duration) => {
+    if (confettiRef.current) {
+      confettiRef.current.rain(duration);
+    }
+  };
+
+  // Sync music state
+  useEffect(() => {
+    setMusicActive(isMusicPlaying());
+  }, []);
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <div className="story-app-container">
+      {/* Background Floating Elements */}
+      <FloatingHearts />
 
-      <div className="ticks"></div>
+      {/* Confetti Particle Canvas */}
+      <ConfettiCanvas ref={confettiRef} />
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+      {/* Navigation & Story Progress */}
+      <ChapterNav
+        currentChapter={currentChapter}
+        setChapter={(c) => {
+          setCurrentChapter(c);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }}
+        totalChapters={chapterTitles.length}
+        chapterTitles={chapterTitles}
+        isPlaying={musicActive}
+        toggleMusic={handleToggleMusic}
+      />
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+      {/* Story Chapter Canvas */}
+      <main className="story-content-main">
+        {currentChapter === 1 && (
+          <Chapter1Intro onNext={handleNext} />
+        )}
+
+        {currentChapter === 2 && (
+          <Chapter2NurseTribute onNext={handleNext} onPrev={handlePrev} />
+        )}
+
+        {currentChapter === 3 && (
+          <Chapter3Candle
+            onNext={handleNext}
+            onPrev={handlePrev}
+            triggerConfetti={triggerConfetti}
+          />
+        )}
+
+        {currentChapter === 4 && (
+          <Chapter4CakeCut
+            onNext={handleNext}
+            onPrev={handlePrev}
+            triggerConfetti={triggerConfetti}
+            triggerRain={triggerRain}
+            onStartMusic={handleStartMusic}
+          />
+        )}
+
+        {currentChapter === 5 && (
+          <Chapter5Wishes
+            onRestart={handleRestart}
+            onPrev={handlePrev}
+            triggerConfetti={triggerConfetti}
+          />
+        )}
+      </main>
+
+      {/* Story Footer */}
+      <footer className="story-global-footer">
+        <p>
+          Crafted with boundless admiration & love for <strong>Debalina</strong> 🌸
+        </p>
+        <span className="footer-sub">
+          May your heartbeat stay steady, your soul stay vibrant, and your smile never fade.
+        </span>
+      </footer>
+    </div>
+  );
 }
 
-export default App
+export default App;
