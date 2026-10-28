@@ -174,3 +174,4 @@ const Chapter5Wishes = ({ onRestart, onPrev, triggerConfetti }) => {
 };
 
 export default Chapter5Wishes;
+

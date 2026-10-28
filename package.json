@@ -1,0 +1,12 @@
+{
+  "name": "debalina-birthday",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Interactive Birthday Website in Story Format for Nurse Debalina",
+  "scripts": {
+    "dev": "npm --prefix Birthday run dev",
+    "build": "npm --prefix Birthday run build",
+    "preview": "npm --prefix Birthday run preview"
+  }
+}
+

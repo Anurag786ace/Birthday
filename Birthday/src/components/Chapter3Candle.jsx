@@ -165,3 +165,4 @@ const Chapter3Candle = ({ onNext, onPrev, triggerConfetti }) => {
 };
 
 export default Chapter3Candle;
+

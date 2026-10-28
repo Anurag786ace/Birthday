@@ -220,3 +220,4 @@ const Chapter2NurseTribute = ({ onNext, onPrev }) => {
 };
 
 export default Chapter2NurseTribute;
+

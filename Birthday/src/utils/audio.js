@@ -258,3 +258,4 @@ export function playSparkleSound() {
   playMusicBoxNote(880, now, 0.4, 0.12);
   playMusicBoxNote(1174.66, now + 0.06, 0.4, 0.1);
 }
+

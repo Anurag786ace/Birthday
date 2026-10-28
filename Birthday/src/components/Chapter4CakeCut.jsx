@@ -184,3 +184,4 @@ const Chapter4CakeCut = ({ onNext, onPrev, triggerConfetti, triggerRain, onStart
 };
 
 export default Chapter4CakeCut;
+

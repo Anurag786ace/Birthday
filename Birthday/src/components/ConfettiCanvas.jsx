@@ -188,3 +188,4 @@ const ConfettiCanvas = forwardRef((props, ref) => {
 });
 
 export default ConfettiCanvas;
+
