@@ -26,17 +26,17 @@ const Chapter3Candle = ({ onNext, onPrev, triggerConfetti }) => {
   return (
     <section className={`story-chapter chapter-candle ${isBlown ? 'candle-extinguished' : 'candle-burning'}`}>
       <div className="chapter-badge-wrap">
-        <span className="chapter-pill">Chapter III • Make a Wish</span>
+        <span className="chapter-pill">Chapter III • 8th November Wish</span>
       </div>
 
       <h1 className="chapter-title">
-        {isBlown ? '✨ The Wish Has Taken Flight! ✨' : 'The Glowing Candle of Debalina’s Dreams'}
+        {isBlown ? '✨ The 8th November Wish Has Taken Flight! ✨' : 'The Glowing Candle of Debalina’s Dreams'}
       </h1>
 
       <p className="chapter-lead">
         {isBlown
-          ? 'Your wish has risen into the stars. The universe has recorded every whisper of happiness meant for you.'
-          : 'Close your eyes, take a deep breath, think of the sweetest dream your heart desires, and blow out the candle!'}
+          ? 'Your 8th of November wish has risen into the stars. The universe has recorded every whisper of happiness meant for you.'
+          : 'Close your eyes, think of your sweetest birthday dream for this 8th of November, and blow out the candle!'}
       </p>
 
       {/* Candle Stage */}
@@ -60,7 +60,7 @@ const Chapter3Candle = ({ onNext, onPrev, triggerConfetti }) => {
                 <div className="smoke-puff p1"></div>
                 <div className="smoke-puff p2"></div>
                 <div className="smoke-puff p3"></div>
-                <div className="sparkle-stars">✨ ⭐ 🌟</div>
+                <div className="sparkle-stars">✨ 8th Nov 🌟</div>
               </div>
             )}
           </div>
@@ -76,7 +76,7 @@ const Chapter3Candle = ({ onNext, onPrev, triggerConfetti }) => {
               <span className="wax-drip d3"></span>
             </div>
             <div className="candle-inscription">
-              <span>🩺 Debalina</span>
+              <span>🩺 Debalina • 8 Nov</span>
             </div>
           </div>
 
@@ -94,17 +94,17 @@ const Chapter3Candle = ({ onNext, onPrev, triggerConfetti }) => {
           {!isBlown ? (
             <button className="blow-candle-btn" onClick={handleBlowCandle}>
               <span className="wind-icon">💨</span>
-              <span className="btn-main-text">Blow Out the Candle & Make a Wish!</span>
+              <span className="btn-main-text">Blow Out the Candle & Make Your 8th Nov Wish!</span>
             </button>
           ) : (
             <div className="wish-revealed-panel">
               <div className="wish-blessing-card">
                 <div className="blessing-header">
                   <span className="magic-icon">🌟</span>
-                  <h3>The Universe’s Blessing For Nurse Debalina</h3>
+                  <h3>8th November Blessing For Nurse Debalina</h3>
                 </div>
                 <p className="blessing-text">
-                  “May all the healing, kindness, and patient love you give so selflessly to the world
+                  “On this blessed 8th of November, may all the healing, kindness, and patient love you give so selflessly
                   return to you multiplied a million times over. May your shifts be smooth, your heart always full,
                   your laughter ever bright, and your wildest dreams come true.”
                 </p>
@@ -121,12 +121,12 @@ const Chapter3Candle = ({ onNext, onPrev, triggerConfetti }) => {
 
       {/* Interactive Wish Note Area */}
       <div className="personal-wish-box">
-        <h4>💌 Whisper Your Secret Birthday Wish to the Stars:</h4>
+        <h4>💌 Whisper Your 8th November Birthday Wish to the Stars:</h4>
         <div className="wish-input-row">
           <input
             type="text"
             className="wish-input"
-            placeholder="e.g. A peaceful vacation, boundless joy, lots of chocolates..."
+            placeholder="e.g. A peaceful vacation, endless joy, lots of chocolates..."
             value={customWish}
             onChange={(e) => setCustomWish(e.target.value)}
           />
@@ -145,7 +145,7 @@ const Chapter3Candle = ({ onNext, onPrev, triggerConfetti }) => {
           </button>
         </div>
         {isTypingWish && (
-          <p className="wish-sent-msg">✨ Your secret wish for Debalina has been etched into the stars! ✨</p>
+          <p className="wish-sent-msg">✨ Your secret 8th November wish for Debalina has been etched into the stars! ✨</p>
         )}
       </div>
 
@@ -165,4 +165,3 @@ const Chapter3Candle = ({ onNext, onPrev, triggerConfetti }) => {
 };
 
 export default Chapter3Candle;
-

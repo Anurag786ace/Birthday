@@ -2022,3 +2022,851 @@
     right: -20px;
   }
 }
+
+/* ====================================================
+   8TH NOVEMBER DATE HIGHLIGHT & WRITING ANIMATION
+   ==================================================== */
+
+.date-highlight {
+  color: var(--color-primary-dark);
+  background: rgba(255, 101, 132, 0.12);
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-weight: 700;
+}
+
+.writing-controls-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(255, 101, 132, 0.2);
+  border-radius: 16px;
+  padding: 10px 18px;
+  margin-bottom: 20px;
+  gap: 12px;
+  flex-wrap: wrap;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03);
+}
+
+.writing-status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.88rem;
+  color: #2f3542;
+  font-weight: 600;
+}
+
+.quill-writing-icon {
+  display: inline-block;
+  font-size: 1.25rem;
+  animation: quillWriteMotion 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes quillWriteMotion {
+  0% { transform: rotate(-10deg) translate(0, 0); }
+  50% { transform: rotate(18deg) translate(2px, -3px); }
+  100% { transform: rotate(-5deg) translate(-1px, 2px); }
+}
+
+.writing-done-check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background: #00cec9;
+  color: #fff;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.writing-action-buttons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.writing-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  background: #f1f2f6;
+  color: #2d3436;
+  transition: all 0.2s ease;
+}
+
+.writing-pill-btn:hover {
+  background: #e4e7eb;
+  transform: translateY(-1px);
+}
+
+.writing-pill-btn.skip {
+  background: rgba(255, 101, 132, 0.12);
+  color: var(--color-primary-dark);
+}
+
+.writing-pill-btn.skip:hover {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.writing-pill-btn.replay {
+  background: rgba(132, 94, 194, 0.12);
+  color: #845ec2;
+}
+
+.writing-pill-btn.replay:hover {
+  background: #845ec2;
+  color: #fff;
+}
+
+.writing-pill-btn.sound-toggle.active {
+  background: rgba(0, 206, 201, 0.15);
+  color: #00a896;
+}
+
+.animated-writing-body {
+  position: relative;
+  min-height: 220px;
+}
+
+.writing-paragraph {
+  white-space: pre-wrap;
+  margin-bottom: 16px;
+  line-height: 1.85;
+  font-family: var(--font-body);
+}
+
+.active-quill-cursor {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 2px;
+  vertical-align: middle;
+}
+
+.ink-caret {
+  color: #2f3542;
+  font-weight: 900;
+  font-size: 1.2rem;
+  animation: caretBlink 0.7s infinite alternate;
+  margin-right: 2px;
+}
+
+@keyframes caretBlink {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.quill-pen-emoji {
+  font-size: 1.35rem;
+  display: inline-block;
+  animation: penScribe 0.4s ease-in-out infinite alternate;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
+}
+
+@keyframes penScribe {
+  0% { transform: rotate(10deg) translate(0, 0); }
+  100% { transform: rotate(28deg) translate(3px, 2px); }
+}
+
+/* ====================================================
+   POLAROID PHOTO FRAMES & ALBUMS
+   ==================================================== */
+
+.intro-hero-split {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 28px;
+  align-items: center;
+  margin-bottom: 36px;
+}
+
+.hero-photo-column {
+  display: flex;
+  justify-content: center;
+}
+
+.hero-ecg-column .ecg-monitor-card {
+  margin-bottom: 0;
+}
+
+.nurse-photo-wrap {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.cake-stage-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 28px;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.cake-photo-sidebar {
+  display: flex;
+  justify-content: center;
+}
+
+/* Polaroid Base Styling */
+.polaroid-frame {
+  background: #ffffff;
+  padding: 12px 12px 18px;
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+  user-select: none;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.polaroid-frame:hover {
+  transform: scale(1.04) rotate(0deg) !important;
+  box-shadow: 0 18px 36px rgba(255, 101, 132, 0.22);
+  z-index: 15;
+}
+
+.polaroid-frame.size-large {
+  width: 250px;
+}
+
+.polaroid-frame.size-medium {
+  width: 215px;
+}
+
+.polaroid-frame.size-small {
+  width: 175px;
+}
+
+/* Washi Tape Accent on Polaroid */
+.washi-tape {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 75px;
+  height: 22px;
+  background: rgba(255, 234, 167, 0.85);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  border-left: 2px dashed rgba(223, 230, 233, 0.9);
+  border-right: 2px dashed rgba(223, 230, 233, 0.9);
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* Photo Area */
+.polaroid-photo-area {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: #f1f2f6;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.08);
+}
+
+.uploaded-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.polaroid-frame:hover .uploaded-photo {
+  transform: scale(1.05);
+}
+
+.photo-placeholder-box {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 14px;
+}
+
+.placeholder-icon {
+  font-size: 2.8rem;
+  margin-bottom: 6px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.placeholder-hint {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #2d3436;
+  line-height: 1.3;
+}
+
+.placeholder-subhint {
+  font-size: 0.72rem;
+  color: #636e72;
+  margin-top: 4px;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+/* Overlay Actions */
+.photo-overlay-actions {
+  position: absolute;
+  bottom: 8px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: all 0.25s ease;
+  z-index: 10;
+}
+
+.polaroid-frame:hover .photo-overlay-actions {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.photo-action-btn {
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 5px 10px;
+  border-radius: 14px;
+  backdrop-filter: blur(8px);
+}
+
+.photo-action-btn.upload {
+  background: rgba(255, 255, 255, 0.92);
+  color: #2d3436;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.photo-action-btn.upload:hover {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.photo-action-btn.remove {
+  background: rgba(235, 77, 75, 0.88);
+  color: #fff;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.polaroid-caption {
+  text-align: center;
+  padding-top: 10px;
+}
+
+.caption-title {
+  display: block;
+  font-family: var(--font-cursive);
+  font-size: 1.15rem;
+  color: #2d3436;
+  line-height: 1.2;
+}
+
+.caption-sub {
+  display: block;
+  font-size: 0.72rem;
+  color: #747d8c;
+  margin-top: 2px;
+}
+
+/* Chapter 5 Memory Album Grid */
+.memory-album-section {
+  background: linear-gradient(135deg, rgba(255, 240, 245, 0.8), rgba(254, 243, 226, 0.8));
+  border: 1px dashed rgba(255, 101, 132, 0.35);
+  border-radius: 24px;
+  padding: 32px 24px;
+  margin: 36px 0;
+  text-align: center;
+}
+
+.album-intro {
+  font-size: 0.92rem;
+  color: var(--color-text-muted);
+  max-width: 600px;
+  margin: 0 auto 28px;
+}
+
+.polaroid-album-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+/* ====================================================
+   INLINE PEN TRACKER & REALISTIC WRITING ANIMATION
+   ==================================================== */
+
+.inline-pen-tracker {
+  display: inline-flex;
+  align-items: flex-end;
+  position: relative;
+  margin-left: 2px;
+  vertical-align: baseline;
+  user-select: none;
+  pointer-events: none;
+}
+
+.ink-caret {
+  display: inline-block;
+  color: #e84364;
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1;
+  animation: inkCaretBlink 0.45s ease-in-out infinite alternate;
+  margin-right: 1px;
+}
+
+@keyframes inkCaretBlink {
+  0% { opacity: 0.2; }
+  100% { opacity: 1; }
+}
+
+.active-pen-nib {
+  display: inline-block;
+  position: relative;
+  width: 32px;
+  height: 32px;
+  margin-left: -4px;
+  margin-bottom: -6px;
+  transform-origin: 4px 21px; /* Pivot at the pen tip */
+  animation: penStrokeMotion 0.14s ease-in-out infinite alternate;
+  filter: drop-shadow(1px 3px 3px rgba(0, 0, 0, 0.3));
+}
+
+.pen-nib-svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(10deg);
+}
+
+@keyframes penStrokeMotion {
+  0% {
+    transform: rotate(0deg) translate(0, 0);
+  }
+  50% {
+    transform: rotate(6deg) translate(1.5px, -1.8px);
+  }
+  100% {
+    transform: rotate(-3deg) translate(-0.8px, 0.8px);
+  }
+}
+
+/* Responsive adjustments for photos */
+@media (max-width: 768px) {
+  .intro-hero-split {
+    grid-template-columns: 1fr;
+  }
+
+  .cake-stage-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .polaroid-album-grid {
+    gap: 16px;
+  }
+}
+
+/* ====================================================
+   THE GREAT DEBALINA PARADOX: NURSE VS. KIDDO MODE
+   ==================================================== */
+
+.duality-card {
+  background: linear-gradient(135deg, #ffffff 0%, #fff7fa 50%, #fefcf3 100%);
+  border: 2px solid rgba(255, 101, 132, 0.25);
+  border-radius: 26px;
+  padding: 36px 30px;
+  margin: 38px 0;
+  box-shadow: 0 16px 38px rgba(255, 101, 132, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.duality-header {
+  text-align: center;
+  max-width: 650px;
+  margin: 0 auto 24px;
+}
+
+.duality-pill {
+  display: inline-block;
+  padding: 5px 16px;
+  border-radius: 20px;
+  background: rgba(255, 101, 132, 0.12);
+  color: var(--color-primary-dark);
+  font-size: 0.82rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.duality-header h2 {
+  font-family: var(--font-serif);
+  font-size: 1.85rem;
+  color: #1a1a2e;
+  margin-bottom: 8px;
+}
+
+.duality-subtext {
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+/* Switcher Buttons */
+.mode-switcher-wrap {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.mode-tab-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  border-radius: 30px;
+  background: #f1f2f6;
+  color: #2d3436;
+  font-size: 0.95rem;
+  font-weight: 700;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.mode-tab-button:hover {
+  transform: translateY(-2px);
+  background: #e4e7eb;
+}
+
+.mode-tab-button.active {
+  background: #00cec9;
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(0, 206, 201, 0.35);
+}
+
+.mode-tab-button.kiddo.active {
+  background: linear-gradient(135deg, #ff6584, #ff8e53);
+  color: #fff;
+  box-shadow: 0 8px 24px rgba(255, 101, 132, 0.4);
+}
+
+.mode-tab-icon {
+  font-size: 1.3rem;
+}
+
+/* Content Display */
+.mode-content-display {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 28px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  animation: modeFadeIn 0.35s ease;
+}
+
+@keyframes modeFadeIn {
+  0% { opacity: 0; transform: translateY(12px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.mode-status-badge {
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: 12px;
+  background: rgba(0, 206, 201, 0.15);
+  color: #00a896;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.6px;
+  margin-bottom: 18px;
+}
+
+.mode-status-badge.kiddo {
+  background: rgba(255, 101, 132, 0.15);
+  color: var(--color-primary-dark);
+}
+
+.mode-trait-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.mode-trait-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.trait-icon {
+  font-size: 1.4rem;
+  margin-top: 2px;
+}
+
+.mode-trait-list strong {
+  display: block;
+  font-size: 1rem;
+  color: #2d3436;
+  margin-bottom: 2px;
+}
+
+.mode-trait-list span {
+  font-size: 0.92rem;
+  color: var(--color-text-muted);
+  line-height: 1.55;
+}
+
+/* Pamper Station Console */
+.pamper-station {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 2px dashed #f1f2f6;
+  text-align: center;
+}
+
+.pamper-station h4 {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  color: #2d3436;
+  margin-bottom: 14px;
+}
+
+.pamper-buttons-grid {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.pamper-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 18px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #fff0f5, #ffeaa7);
+  border: 1px solid rgba(255, 101, 132, 0.3);
+  color: #2d3436;
+  font-size: 0.88rem;
+  font-weight: 700;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.pamper-btn:hover {
+  transform: translateY(-3px) scale(1.05);
+  background: linear-gradient(135deg, #ffccd5, #fed330);
+  box-shadow: 0 6px 16px rgba(255, 101, 132, 0.25);
+}
+
+.pamper-reaction-bubble {
+  background: #fffafa;
+  border: 1px solid rgba(255, 101, 132, 0.2);
+  border-radius: 14px;
+  padding: 14px 20px;
+  display: inline-block;
+  max-width: 600px;
+}
+
+.pamper-reaction-bubble p {
+  font-size: 0.95rem;
+  color: var(--color-primary-dark);
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.pamper-counter {
+  font-size: 0.78rem;
+  color: #747d8c;
+  font-weight: 700;
+}
+
+/* ====================================================
+   BEAUTIFUL FLOATING BALLOONS
+   ==================================================== */
+
+.floating-balloons-viewport {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 3;
+}
+
+.balloon-wrapper {
+  position: absolute;
+  bottom: -200px;
+  pointer-events: auto;
+  cursor: pointer;
+  animation-name: balloonAscend;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  transition: transform 0.2s ease;
+  user-select: none;
+}
+
+.balloon-wrapper:hover {
+  transform: scale(1.15) !important;
+  filter: brightness(1.1);
+  z-index: 50;
+}
+
+.balloon-body-wrap {
+  animation: balloonGentleSway var(--sway-time, 4s) ease-in-out infinite alternate;
+  transform-origin: 50% 100%;
+}
+
+.balloon-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+}
+
+.balloon-string {
+  animation: stringFlutter 2.4s ease-in-out infinite alternate;
+  transform-origin: 50px 138px;
+}
+
+@keyframes balloonAscend {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.88;
+  }
+  85% {
+    opacity: 0.88;
+  }
+  100% {
+    transform: translateY(-135vh);
+    opacity: 0;
+  }
+}
+
+@keyframes balloonGentleSway {
+  0% {
+    transform: translateX(calc(-1 * var(--sway-amt, 20px))) rotate(-6deg);
+  }
+  50% {
+    transform: translateX(0px) rotate(2deg);
+  }
+  100% {
+    transform: translateX(var(--sway-amt, 20px)) rotate(7deg);
+  }
+}
+
+@keyframes stringFlutter {
+  0% {
+    transform: scaleX(0.85) rotate(-3deg);
+  }
+  100% {
+    transform: scaleX(1.15) rotate(4deg);
+  }
+}
+
+/* Popped Balloon Effect */
+.popped-sparkle-burst {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: flex;
+  gap: 4px;
+  font-size: 1.8rem;
+  animation: popDisappear 0.4s ease-out forwards;
+  pointer-events: none;
+}
+
+@keyframes popDisappear {
+  0% {
+    transform: translate(-50%, -50%) scale(0.6);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.6);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(2.2);
+    opacity: 0;
+  }
+}
+
+/* Floating Release Balloons Pill Button */
+.release-balloons-pill {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 101, 132, 0.35);
+  box-shadow: 0 8px 24px rgba(255, 101, 132, 0.25);
+  color: var(--color-primary-dark);
+  font-size: 0.88rem;
+  font-weight: 700;
+  z-index: 999;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.release-balloons-pill:hover {
+  transform: translateY(-3px) scale(1.05);
+  background: linear-gradient(135deg, #ff6584, #ff8e53);
+  color: #fff;
+  box-shadow: 0 12px 30px rgba(255, 101, 132, 0.4);
+}
+
+.pill-balloon-icon {
+  font-size: 1.25rem;
+  animation: balloonBob 1.6s ease-in-out infinite alternate;
+}
+
+@keyframes balloonBob {
+  0% { transform: translateY(0) rotate(-4deg); }
+  100% { transform: translateY(-4px) rotate(6deg); }
+}
+
+@media (max-width: 768px) {
+  .release-balloons-pill {
+    bottom: 16px;
+    right: 16px;
+    padding: 8px 14px;
+    font-size: 0.8rem;
+  }
+}

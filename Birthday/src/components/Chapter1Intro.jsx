@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { playHeartbeatSound, playSparkleSound } from '../utils/audio';
+import PhotoFrame from './PhotoFrame';
 
 const Chapter1Intro = ({ onNext }) => {
   const [pulseActive, setPulseActive] = useState(false);
@@ -53,7 +54,7 @@ const Chapter1Intro = ({ onNext }) => {
   return (
     <section className="story-chapter chapter-intro">
       <div className="chapter-badge-wrap">
-        <span className="chapter-pill">Chapter I • The Origin</span>
+        <span className="chapter-pill">Chapter I • Born on 8th November</span>
       </div>
 
       <h1 className="chapter-title">
@@ -62,42 +63,60 @@ const Chapter1Intro = ({ onNext }) => {
 
       <p className="chapter-lead">
         In a world that often rushes by, there are rare souls whose quiet bravery and tender hands
-        bring light into the darkest hospital rooms. Today, that story belongs to someone truly extraordinary:
+        bring light into the darkest hospital rooms. Every year on the <strong className="date-highlight">8th of November</strong>,
+        we celebrate someone truly extraordinary:
         <span className="highlight-name"> Debalina</span>.
       </p>
 
-      {/* Interactive Heartbeat Monitor */}
-      <div className={`ecg-monitor-card ${pulseActive ? 'pulsing' : ''}`}>
-        <div className="ecg-header">
-          <div className="ecg-status">
-            <span className="live-dot"></span>
-            <span>CARDIAC RHYTHM: PURE COMPASSION</span>
-          </div>
-          <div className="ecg-bpm">
-            <span>BPM</span>
-            <strong>{pulseActive ? '108' : '72'}</strong>
-          </div>
+      {/* Hero Photo & Cardiac Section */}
+      <div className="intro-hero-split">
+        <div className="hero-photo-column">
+          <PhotoFrame
+            id="ch1_debalina_portrait"
+            title="Debalina 🌸"
+            subtitle="The Birthday Girl • 8th Nov"
+            placeholderIcon="👩‍⚕️"
+            placeholderGradient="linear-gradient(135deg, #ffd1dc, #ff9ebb)"
+            rotation={-2}
+            size="large"
+          />
         </div>
 
-        <div className="ecg-screen">
-          <svg className="ecg-svg" viewBox="0 0 500 120" preserveAspectRatio="none">
-            <path
-              className="ecg-line-bg"
-              d="M0,60 L70,60 L85,60 L95,20 L105,100 L115,40 L125,75 L135,60 L230,60 L245,60 L255,15 L265,105 L275,35 L285,75 L295,60 L390,60 L405,60 L415,20 L425,100 L435,40 L445,75 L455,60 L500,60"
-            />
-            <path
-              className={`ecg-line-glow ${pulseActive ? 'active-pulse' : ''}`}
-              d="M0,60 L70,60 L85,60 L95,20 L105,100 L115,40 L125,75 L135,60 L230,60 L245,60 L255,15 L265,105 L275,35 L285,75 L295,60 L390,60 L405,60 L415,20 L425,100 L435,40 L445,75 L455,60 L500,60"
-            />
-          </svg>
-          <div className="ecg-scanline"></div>
-        </div>
+        {/* Interactive Heartbeat Monitor */}
+        <div className="hero-ecg-column">
+          <div className={`ecg-monitor-card ${pulseActive ? 'pulsing' : ''}`}>
+            <div className="ecg-header">
+              <div className="ecg-status">
+                <span className="live-dot"></span>
+                <span>CARDIAC RHYTHM: PURE COMPASSION • 8TH NOV BDAY</span>
+              </div>
+              <div className="ecg-bpm">
+                <span>BPM</span>
+                <strong>{pulseActive ? '108' : '72'}</strong>
+              </div>
+            </div>
 
-        <div className="ecg-footer">
-          <button className="heartbeat-action-btn" onClick={handlePulse}>
-            <span className="heart-icon">💓</span>
-            <span>{pulseActive ? 'Heartbeat Felt: 100% Love & Care!' : 'Tap to Listen to Debalina’s Caring Heart'}</span>
-          </button>
+            <div className="ecg-screen">
+              <svg className="ecg-svg" viewBox="0 0 500 120" preserveAspectRatio="none">
+                <path
+                  className="ecg-line-bg"
+                  d="M0,60 L70,60 L85,60 L95,20 L105,100 L115,40 L125,75 L135,60 L230,60 L245,60 L255,15 L265,105 L275,35 L285,75 L295,60 L390,60 L405,60 L415,20 L425,100 L435,40 L445,75 L455,60 L500,60"
+                />
+                <path
+                  className={`ecg-line-glow ${pulseActive ? 'active-pulse' : ''}`}
+                  d="M0,60 L70,60 L85,60 L95,20 L105,100 L115,40 L125,75 L135,60 L230,60 L245,60 L255,15 L265,105 L275,35 L285,75 L295,60 L390,60 L405,60 L415,20 L425,100 L435,40 L445,75 L455,60 L500,60"
+                />
+              </svg>
+              <div className="ecg-scanline"></div>
+            </div>
+
+            <div className="ecg-footer">
+              <button className="heartbeat-action-btn" onClick={handlePulse}>
+                <span className="heart-icon">💓</span>
+                <span>{pulseActive ? 'Heartbeat Felt: 100% Love & Care!' : 'Tap to Listen to Debalina’s Caring Heart'}</span>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -142,7 +161,7 @@ const Chapter1Intro = ({ onNext }) => {
         <p className="quote-text">
           “To cure sometimes, to relieve often, to comfort always. But Debalina does more—she brings life, light, and warmth wherever her stethoscope travels.”
         </p>
-        <span className="quote-author">— With endless admiration for our favorite Nurse</span>
+        <span className="quote-author">— Celebrating our favorite Nurse on her 8th November Birthday</span>
       </div>
 
       {/* Navigation to next chapter */}
@@ -157,4 +176,3 @@ const Chapter1Intro = ({ onNext }) => {
 };
 
 export default Chapter1Intro;
-

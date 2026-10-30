@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { playCakeSliceSound, startBdayMusic, playSparkleSound } from '../utils/audio';
+import PhotoFrame from './PhotoFrame';
 
 const Chapter4CakeCut = ({ onNext, onPrev, triggerConfetti, triggerRain, onStartMusic }) => {
   const [isCut, setIsCut] = useState(false);
@@ -42,17 +43,17 @@ const Chapter4CakeCut = ({ onNext, onPrev, triggerConfetti, triggerRain, onStart
   return (
     <section className="story-chapter chapter-cake">
       <div className="chapter-badge-wrap">
-        <span className="chapter-pill">Chapter IV • The Sweetest Moment</span>
+        <span className="chapter-pill">Chapter IV • 8th Nov Celebration</span>
       </div>
 
       <h1 className="chapter-title">
-        {isCut ? '🎉 Happy Birthday, Nurse Debalina! 🎉' : 'The Grand Cake Cutting Ceremony'}
+        {isCut ? '🎉 Happy Birthday, Nurse Debalina! (8th Nov) 🎉' : 'The Grand Cake Cutting Ceremony'}
       </h1>
 
       <p className="chapter-lead">
         {isCut
-          ? 'The cake is cut, the celebration is in full swing, and smiles are everywhere! May your year be as sweet as every bite!'
-          : 'Hold the ceremonial knife, gather around, and let’s slice Debalina’s custom-crafted birthday cake!'}
+          ? 'The 8th November cake is cut, the party is in full swing, and smiles are everywhere! May your new year of life be as sweet as every bite!'
+          : 'Hold the ceremonial knife, gather around, and let’s slice Debalina’s custom 8th November birthday cake!'}
       </p>
 
       {/* Celebration Banner when cut */}
@@ -60,101 +61,115 @@ const Chapter4CakeCut = ({ onNext, onPrev, triggerConfetti, triggerRain, onStart
         <div className="celebration-banner-wrapper">
           <div className="celebration-banner">
             <span className="bunting">🎊 🎈 🌸 🩺 🎂 🌸 🎈 🎊</span>
-            <h2>HAPPY BIRTHDAY DEBALINA!</h2>
+            <h2>HAPPY BIRTHDAY DEBALINA • 8th NOVEMBER!</h2>
             <p>To our heroic nurse, incredible friend, and pure ray of sunshine!</p>
           </div>
         </div>
       )}
 
-      {/* Cake Stage */}
-      <div className="cake-ceremony-stage">
-        <div className="cake-pedestal">
-          {/* Animated Knife */}
-          <div
-            className={`ceremonial-knife ${isCutting ? 'cutting' : ''} ${isCut ? 'cut-done' : ''}`}
-            onClick={handleCutCake}
-            title="Click knife to slice the cake!"
-          >
-            <div className="knife-blade">
-              <span className="knife-shine"></span>
+      {/* Cake Stage with Birthday Photo Frame */}
+      <div className="cake-stage-layout">
+        <div className="cake-photo-sidebar">
+          <PhotoFrame
+            id="ch4_bday_girl_photo"
+            title="The Birthday Queen 👑"
+            subtitle="Debalina • 8th Nov Celebrations"
+            placeholderIcon="🎂"
+            placeholderGradient="linear-gradient(135deg, #ffeaa7, #fab1a0)"
+            rotation={-3}
+            size="medium"
+          />
+        </div>
+
+        <div className="cake-ceremony-stage">
+          <div className="cake-pedestal">
+            {/* Animated Knife */}
+            <div
+              className={`ceremonial-knife ${isCutting ? 'cutting' : ''} ${isCut ? 'cut-done' : ''}`}
+              onClick={handleCutCake}
+              title="Click knife to slice the cake!"
+            >
+              <div className="knife-blade">
+                <span className="knife-shine"></span>
+              </div>
+              <div className="knife-handle">
+                <span className="knife-ribbon">🎀</span>
+              </div>
             </div>
-            <div className="knife-handle">
-              <span className="knife-ribbon">🎀</span>
+
+            {/* Layered Birthday Cake Illustration */}
+            <div className={`birthday-cake ${isCut ? 'cake-sliced' : ''}`}>
+              {/* Top Candles & Sparklers */}
+              <div className="cake-sparklers">
+                <span className="sparkler s1">✨</span>
+                <span className="sparkler s2">⭐ 8 Nov</span>
+                <span className="sparkler s3">✨</span>
+              </div>
+
+              {/* Top Tier */}
+              <div className="cake-tier tier-top">
+                <div className="frosting-plaque">
+                  <span>Debalina • 8 Nov 🌸</span>
+                </div>
+                <div className="strawberries-row">
+                  <span>🍓</span><span>🍓</span><span>🍓</span>
+                </div>
+                <div className="frosting-drips"></div>
+              </div>
+
+              {/* Middle Tier */}
+              <div className="cake-tier tier-mid">
+                <div className="nurse-fondant-decor">
+                  <span className="fondant-badge">🩺</span>
+                  <span className="fondant-pill">8th NOV</span>
+                  <span className="fondant-badge">🩹</span>
+                </div>
+                <div className="cream-pearls"></div>
+              </div>
+
+              {/* Bottom Tier */}
+              <div className="cake-tier tier-bottom">
+                <div className="bottom-frosting-swirls"></div>
+                <div className="cake-base-plate"></div>
+              </div>
+
+              {/* Sliced Out Cake Wedge */}
+              {isCut && (
+                <div className="cake-slice-wedge">
+                  <div className="wedge-frosting">🍓</div>
+                  <div className="wedge-cream"></div>
+                  <div className="wedge-plate">
+                    <span>8th Nov Slice</span>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
 
-          {/* Layered Birthday Cake Illustration */}
-          <div className={`birthday-cake ${isCut ? 'cake-sliced' : ''}`}>
-            {/* Top Candles & Sparklers */}
-            <div className="cake-sparklers">
-              <span className="sparkler s1">✨</span>
-              <span className="sparkler s2">⭐</span>
-              <span className="sparkler s3">✨</span>
-            </div>
-
-            {/* Top Tier */}
-            <div className="cake-tier tier-top">
-              <div className="frosting-plaque">
-                <span>Debalina 🌸</span>
-              </div>
-              <div className="strawberries-row">
-                <span>🍓</span><span>🍓</span><span>🍓</span>
-              </div>
-              <div className="frosting-drips"></div>
-            </div>
-
-            {/* Middle Tier */}
-            <div className="cake-tier tier-mid">
-              <div className="nurse-fondant-decor">
-                <span className="fondant-badge">🩺</span>
-                <span className="fondant-pill">💖</span>
-                <span className="fondant-badge">🩹</span>
-              </div>
-              <div className="cream-pearls"></div>
-            </div>
-
-            {/* Bottom Tier */}
-            <div className="cake-tier tier-bottom">
-              <div className="bottom-frosting-swirls"></div>
-              <div className="cake-base-plate"></div>
-            </div>
-
-            {/* Sliced Out Cake Wedge */}
-            {isCut && (
-              <div className="cake-slice-wedge">
-                <div className="wedge-frosting">🍓</div>
-                <div className="wedge-cream"></div>
-                <div className="wedge-plate">
-                  <span>Golden Plate</span>
-                </div>
+          {/* Action Controls */}
+          <div className="cake-controls">
+            {!isCut ? (
+              <button
+                className={`cut-cake-btn ${isCutting ? 'disabled' : ''}`}
+                onClick={handleCutCake}
+                disabled={isCutting}
+              >
+                <span className="knife-btn-icon">🔪</span>
+                <span className="btn-main-text">
+                  {isCutting ? 'Slicing with Love...' : 'Cut the 8th November Cake! 🎂'}
+                </span>
+              </button>
+            ) : (
+              <div className="cut-celebration-actions">
+                <button className="feed-slice-btn" onClick={handleFeedSlice}>
+                  <span>🍰 Feed 8th Nov Cake Slice to Debalina! ({fedSlices} shared)</span>
+                </button>
+                <button className="cut-again-btn" onClick={handleResetCake}>
+                  <span>↺ Re-cut Cake</span>
+                </button>
               </div>
             )}
           </div>
-        </div>
-
-        {/* Action Buttons */}
-        <div className="cake-controls">
-          {!isCut ? (
-            <button
-              className={`cut-cake-btn ${isCutting ? 'disabled' : ''}`}
-              onClick={handleCutCake}
-              disabled={isCutting}
-            >
-              <span className="knife-btn-icon">🔪</span>
-              <span className="btn-main-text">
-                {isCutting ? 'Slicing with Love...' : 'Cut the Birthday Cake! 🎂'}
-              </span>
-            </button>
-          ) : (
-            <div className="cut-celebration-actions">
-              <button className="feed-slice-btn" onClick={handleFeedSlice}>
-                <span>🍰 Feed Virtual Slice of Cake to Debalina! ({fedSlices} shared)</span>
-              </button>
-              <button className="cut-again-btn" onClick={handleResetCake}>
-                <span>↺ Re-cut Cake</span>
-              </button>
-            </div>
-          )}
         </div>
       </div>
 
@@ -175,7 +190,7 @@ const Chapter4CakeCut = ({ onNext, onPrev, triggerConfetti, triggerRain, onStart
           <span>Chapter III: The Glowing Candle</span>
         </button>
         <button className="primary-story-btn" onClick={onNext}>
-          <span>Chapter V • Letters & Wishes Jar</span>
+          <span>Chapter V • Letters & Writing Animation</span>
           <span className="btn-arrow">➔</span>
         </button>
       </div>
@@ -184,4 +199,3 @@ const Chapter4CakeCut = ({ onNext, onPrev, triggerConfetti, triggerRain, onStart
 };
 
 export default Chapter4CakeCut;
-

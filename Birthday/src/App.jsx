@@ -3,6 +3,7 @@ import './App.css';
 
 import ConfettiCanvas from './components/ConfettiCanvas';
 import FloatingHearts from './components/FloatingHearts';
+import FloatingBalloons from './components/FloatingBalloons';
 import ChapterNav from './components/ChapterNav';
 import Chapter1Intro from './components/Chapter1Intro';
 import Chapter2NurseTribute from './components/Chapter2NurseTribute';
@@ -82,6 +83,9 @@ function App() {
     <div className="story-app-container">
       {/* Background Floating Elements */}
       <FloatingHearts />
+
+      {/* Beautiful Floating Balloons */}
+      <FloatingBalloons triggerConfetti={triggerConfetti} />
 
       {/* Confetti Particle Canvas */}
       <ConfettiCanvas ref={confettiRef} />

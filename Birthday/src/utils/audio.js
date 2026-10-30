@@ -259,3 +259,81 @@ export function playSparkleSound() {
   playMusicBoxNote(1174.66, now + 0.06, 0.4, 0.1);
 }
 
+// Subtle quill/fountain pen scratch on paper
+export function playPenScratchSound() {
+  const ctx = getAudioContext();
+  if (!ctx) return;
+
+  try {
+    const now = ctx.currentTime;
+    const bufferSize = Math.floor(ctx.sampleRate * 0.025);
+    const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+    const data = buffer.getChannelData(0);
+
+    for (let i = 0; i < bufferSize; i++) {
+      data[i] = (Math.random() * 2 - 1) * 0.15;
+    }
+
+    const noise = ctx.createBufferSource();
+    noise.buffer = buffer;
+
+    const filter = ctx.createBiquadFilter();
+    filter.type = 'bandpass';
+    filter.frequency.setValueAtTime(2600 + (Math.random() - 0.5) * 600, now);
+    filter.Q.setValueAtTime(2.5, now);
+
+    const gain = ctx.createGain();
+    gain.gain.setValueAtTime(0.008, now);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.025);
+
+    noise.connect(filter);
+    filter.connect(gain);
+    gain.connect(ctx.destination);
+
+    noise.start(now);
+    noise.stop(now + 0.025);
+  } catch (err) {
+    // Ignore any audio context edge cases
+  }
+}
+
+
+// Realistic Balloon Pop Sound Effect
+export function playBalloonPopSound() {
+  const ctx = getAudioContext();
+  if (!ctx) return;
+
+  try {
+    const now = ctx.currentTime;
+    const bufferSize = Math.floor(ctx.sampleRate * 0.04);
+    const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+    const data = buffer.getChannelData(0);
+
+    for (let i = 0; i < bufferSize; i++) {
+      data[i] = (Math.random() * 2 - 1) * 0.5;
+    }
+
+    const noise = ctx.createBufferSource();
+    noise.buffer = buffer;
+
+    const filter = ctx.createBiquadFilter();
+    filter.type = 'highpass';
+    filter.frequency.setValueAtTime(1400, now);
+
+    const gain = ctx.createGain();
+    gain.gain.setValueAtTime(0.3, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
+
+    noise.connect(filter);
+    filter.connect(gain);
+    gain.connect(ctx.destination);
+
+    noise.start(now);
+    noise.stop(now + 0.04);
+
+    // Soft cheerful chime after pop
+    playMusicBoxNote(1046.5, now + 0.015, 0.45, 0.16);
+  } catch (err) {
+    // Ignore audio context edge cases
+  }
+}

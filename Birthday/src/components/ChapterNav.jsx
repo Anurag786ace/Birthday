@@ -12,7 +12,7 @@ const ChapterNav = ({
     <header className="story-nav-header">
       <div className="story-nav-inner">
         <div className="story-brand" onClick={() => { playSparkleSound(); setChapter(1); }}>
-          <span className="brand-badge">🩺 Debalina's Day</span>
+          <span className="brand-badge">🩺 Debalina • 8th Nov</span>
           <span className="brand-sub">The Healer's Birthday Story</span>
         </div>
 
@@ -76,4 +76,3 @@ const ChapterNav = ({
 };
 
 export default ChapterNav;
-

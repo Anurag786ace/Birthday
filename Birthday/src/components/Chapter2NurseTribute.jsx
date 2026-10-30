@@ -1,9 +1,13 @@
 import { useState } from 'react';
 import { playHeartbeatSound, playSparkleSound } from '../utils/audio';
+import PhotoFrame from './PhotoFrame';
 
 const Chapter2NurseTribute = ({ onNext, onPrev }) => {
   const [stampActive, setStampActive] = useState(false);
   const [selectedPillar, setSelectedPillar] = useState(0);
+  const [activeMode, setActiveMode] = useState('kiddo'); // default to kiddo so user sees it right away!
+  const [pamperStatus, setPamperStatus] = useState('Debalina is waiting for pampering... 🥺');
+  const [pamperCount, setPamperCount] = useState(0);
 
   const pillars = [
     {
@@ -38,6 +42,21 @@ const Chapter2NurseTribute = ({ onNext, onPrev }) => {
     playHeartbeatSound();
   };
 
+  const handlePamper = (type) => {
+    playSparkleSound();
+    setPamperCount((prev) => prev + 1);
+
+    if (type === 'chocolate') {
+      setPamperStatus('🍫 Chocolate Fed! Debalina’s cute pout instantly melted into the biggest smile! 🥰');
+    } else if (type === 'plushie') {
+      setPamperStatus('🧸 Soft Teddy Handed! She is hugging it tightly like an adorable 5-year-old! 💕');
+    } else if (type === 'forehead') {
+      setPamperStatus('💆‍♀️ Forehead Kiss & Head Pat Given! Debalina is blushing and doing a happy wiggle! ✨');
+    } else if (type === 'icecream') {
+      setPamperStatus('🍦 Ice Cream Secured! Zero nurse seriousness detected, 100% baby happiness! 🍭');
+    }
+  };
+
   return (
     <section className="story-chapter chapter-tribute">
       <div className="chapter-badge-wrap">
@@ -50,12 +69,25 @@ const Chapter2NurseTribute = ({ onNext, onPrev }) => {
 
       <p className="chapter-lead">
         Nursing is not merely a profession—it is a sacred craft of compassion, strength, and endless love.
-        Today, we take a moment to honor the girl behind the stethoscope.
+        Today, on the <strong className="date-highlight">8th of November</strong>, we honor the extraordinary girl behind the stethoscope.
       </p>
 
-      {/* Tribute Hero Banner */}
+      {/* Tribute Hero Banner with Photo */}
       <div className="nurse-hero-banner">
         <div className="nurse-illustration-wrap">
+          {/* Debalina's Nurse Photo Frame */}
+          <div className="nurse-photo-wrap">
+            <PhotoFrame
+              id="ch2_nurse_photo"
+              title="Our Hero in Scrubs 🩺"
+              subtitle="Debalina • Healing with Love"
+              placeholderIcon="🩺"
+              placeholderGradient="linear-gradient(135deg, #c7ecee, #7ed6df)"
+              rotation={2}
+              size="medium"
+            />
+          </div>
+
           <div className="stetho-heart-svg-wrap">
             <svg viewBox="0 0 200 200" className="stetho-svg">
               <defs>
@@ -95,6 +127,7 @@ const Chapter2NurseTribute = ({ onNext, onPrev }) => {
               <text x="100" y="125" textAnchor="middle" fontSize="24" fill="#ff4757">❤️</text>
             </svg>
           </div>
+
           <div className="nurse-tribute-text">
             <h3>"Healing Hands, Caring Heart"</h3>
             <p>
@@ -103,6 +136,129 @@ const Chapter2NurseTribute = ({ onNext, onPrev }) => {
               The world is undeniably softer, brighter, and kinder because you chose this noble path.
             </p>
           </div>
+        </div>
+      </div>
+
+      {/* SPECIAL SECRET SECTION: The Debalina Paradox (Nurse vs. Kiddo Mode) */}
+      <div className="duality-card">
+        <div className="duality-header">
+          <span className="duality-pill">🤫 A Sweet Little Secret</span>
+          <h2>The Great Debalina Paradox</h2>
+          <p className="duality-subtext">
+            The world sees her as an untouchable, brave lifesaver... but the moment she is with you,
+            a completely different side appears!
+          </p>
+        </div>
+
+        {/* Mode Toggle Switcher */}
+        <div className="mode-switcher-wrap">
+          <button
+            className={`mode-tab-button ${activeMode === 'nurse' ? 'active' : ''}`}
+            onClick={() => {
+              playSparkleSound();
+              setActiveMode('nurse');
+            }}
+          >
+            <span className="mode-tab-icon">🩺</span>
+            <span className="mode-tab-label">Hospital Mode (The World Sees)</span>
+          </button>
+          <button
+            className={`mode-tab-button kiddo ${activeMode === 'kiddo' ? 'active' : ''}`}
+            onClick={() => {
+              playSparkleSound();
+              setActiveMode('kiddo');
+            }}
+          >
+            <span className="mode-tab-icon">🧸</span>
+            <span className="mode-tab-label">Kiddo Mode (Only In Front of You)</span>
+          </button>
+        </div>
+
+        {/* Mode Content Display */}
+        <div className={`mode-content-display ${activeMode}`}>
+          {activeMode === 'nurse' ? (
+            <div className="mode-details nurse-mode">
+              <div className="mode-status-badge">
+                <span>ON DUTY • HEALTHCARE HERO</span>
+              </div>
+              <ul className="mode-trait-list">
+                <li>
+                  <span className="trait-icon">💉</span>
+                  <div>
+                    <strong>Handles 12-Hour Shifts Effortlessly:</strong>
+                    <span>Fearless on her feet, administering medications and critical care like a seasoned pro.</span>
+                  </div>
+                </li>
+                <li>
+                  <span className="trait-icon">📋</span>
+                  <div>
+                    <strong>Calm Under Chaos:</strong>
+                    <span>When emergencies sound alarms, she stays completely composed and leads with confidence.</span>
+                  </div>
+                </li>
+                <li>
+                  <span className="trait-icon">🛡️</span>
+                  <div>
+                    <strong>The Protector:</strong>
+                    <span>Reassuring worried families, calming fearful patients, and never shedding a tear on duty.</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          ) : (
+            <div className="mode-details kiddo-mode">
+              <div className="mode-status-badge kiddo">
+                <span>OFF DUTY • FULL BABY MODE ACTIVATED 🥰</span>
+              </div>
+              <ul className="mode-trait-list">
+                <li>
+                  <span className="trait-icon">🥺</span>
+                  <div>
+                    <strong>The Legendary Pout:</strong>
+                    <span>The moment she wants attention or chocolate, her lips pout and all adult seriousness vanishes!</span>
+                  </div>
+                </li>
+                <li>
+                  <span className="trait-icon">🍫</span>
+                  <div>
+                    <strong>Cute Mini-Tantrums:</strong>
+                    <span>Acts dramatic over the smallest silly thing just to be pampered, hugged, and told she is right!</span>
+                  </div>
+                </li>
+                <li>
+                  <span className="trait-icon">🧸</span>
+                  <div>
+                    <strong>Precious Childlike Giggles:</strong>
+                    <span>Behind the scrubs is a sweet, innocent child who loves cuddles, fairy lights, and forehead kisses.</span>
+                  </div>
+                </li>
+              </ul>
+
+              {/* Interactive Pamper Station */}
+              <div className="pamper-station">
+                <h4>🧸 Pamper Debalina's Inner Kiddo:</h4>
+                <div className="pamper-buttons-grid">
+                  <button className="pamper-btn" onClick={() => handlePamper('chocolate')}>
+                    <span>🍫 Feed Chocolate</span>
+                  </button>
+                  <button className="pamper-btn" onClick={() => handlePamper('plushie')}>
+                    <span>🧸 Hand Soft Teddy</span>
+                  </button>
+                  <button className="pamper-btn" onClick={() => handlePamper('forehead')}>
+                    <span>💆‍♀️ Forehead Kiss</span>
+                  </button>
+                  <button className="pamper-btn" onClick={() => handlePamper('icecream')}>
+                    <span>🍦 Buy Ice Cream</span>
+                  </button>
+                </div>
+
+                <div className="pamper-reaction-bubble">
+                  <p>{pamperStatus}</p>
+                  <span className="pamper-counter">Pampers given today: {pamperCount} ❤️</span>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
@@ -139,13 +295,13 @@ const Chapter2NurseTribute = ({ onNext, onPrev }) => {
             <div className="rx-symbol">℞</div>
             <div className="rx-hospital-details">
               <h4>DEPARTMENT OF HAPPINESS & CELEBRATION</h4>
-              <p>Special Birthday Medical Order • No. DEBALINA-BDAY-2026</p>
+              <p>Special Birthday Medical Order • No. DEBALINA-08NOV-BDAY</p>
             </div>
             <div className="rx-stamp-area" onClick={handleStamp} title="Click to stamp official approval!">
               <div className={`official-stamp ${stampActive ? 'stamped' : ''}`}>
                 <span>VERIFIED</span>
-                <strong>BEST NURSE EVER</strong>
-                <span>100% APPROVED</span>
+                <strong>NURSE & SWEETEST KIDDO</strong>
+                <span>8TH NOV APPROVED</span>
               </div>
             </div>
           </div>
@@ -153,11 +309,11 @@ const Chapter2NurseTribute = ({ onNext, onPrev }) => {
           <div className="rx-patient-info">
             <div>
               <span className="rx-label">PATIENT NAME:</span>
-              <span className="rx-val">Debalina (Our Favorite Healthcare Angel)</span>
+              <span className="rx-val">Debalina (Our Favorite Healthcare Angel & Forever Baby)</span>
             </div>
             <div>
-              <span className="rx-label">DIAGNOSIS:</span>
-              <span className="rx-val">Severe Case of Being Awesome & It's Her Birthday!</span>
+              <span className="rx-label">DATE:</span>
+              <span className="rx-val">8th November (Official Holiday for Debalina)</span>
             </div>
           </div>
 
@@ -166,28 +322,28 @@ const Chapter2NurseTribute = ({ onNext, onPrev }) => {
               <span className="bullet">✦</span>
               <div className="item-text">
                 <strong>Tab. Pure Bliss & Relaxation (1000mg):</strong>
-                <span>Take immediately. Zero work emails, zero call bells, maximum couch chilling!</span>
+                <span>Take immediately on 8th November. Zero work emails, zero call bells, maximum comfort!</span>
               </div>
             </div>
             <div className="rx-item">
               <span className="bullet">✦</span>
               <div className="item-text">
                 <strong>Syr. Sweet Delights (500ml):</strong>
-                <span>Administer generous slices of birthday cake and sweet treats without counting calories.</span>
+                <span>Administer generous slices of 8th Nov birthday cake and chocolates whenever she makes cute baby faces.</span>
               </div>
             </div>
             <div className="rx-item">
               <span className="bullet">✦</span>
               <div className="item-text">
-                <strong>Infusion of Love & Pampering (Continuous):</strong>
-                <span>Run at full speed with tight hugs, compliments, and heartfelt wishes.</span>
+                <strong>Infusion of Kiddo Pampering & Forehead Kisses (Continuous):</strong>
+                <span>Mandatory head pats, agreeing to all her adorable demands, and loving her drama endlessly.</span>
               </div>
             </div>
             <div className="rx-item">
               <span className="bullet">✦</span>
               <div className="item-text">
                 <strong>Refills:</strong>
-                <span>Unlimited refills valid for the next 365 days of good health and joy!</span>
+                <span>Unlimited refills valid for a lifetime of sweet smiles and gentle care!</span>
               </div>
             </div>
           </div>
@@ -195,10 +351,10 @@ const Chapter2NurseTribute = ({ onNext, onPrev }) => {
           <div className="rx-footer">
             <div className="rx-doctor">
               <span>Prescribing Physician:</span>
-              <span className="rx-doc-signature">The Universe & Everyone Who Loves Debalina ✍️</span>
+              <span className="rx-doc-signature">The Universe & The One Who Adores Your Childlike Heart ✍️</span>
             </div>
             <button className="stamp-btn" onClick={handleStamp}>
-              {stampActive ? '✓ Prescription Officially Certified!' : '🩺 Click to Stamp Official Approval'}
+              {stampActive ? '✓ 8th Nov Birthday Order Certified!' : '🩺 Click to Stamp 8th Nov Approval'}
             </button>
           </div>
         </div>
@@ -220,4 +376,3 @@ const Chapter2NurseTribute = ({ onNext, onPrev }) => {
 };
 
 export default Chapter2NurseTribute;
-
