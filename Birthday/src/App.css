@@ -88,6 +88,8 @@
   cursor: pointer;
   display: flex;
   flex-direction: column;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .brand-badge {
@@ -96,6 +98,7 @@
   font-size: 1.15rem;
   color: var(--color-primary-dark);
   letter-spacing: -0.3px;
+  white-space: nowrap;
 }
 
 .brand-sub {
@@ -154,6 +157,17 @@
 .chapter-step-btn.completed .step-num {
   background: #00cec9;
   color: #fff;
+}
+
+@media (max-width: 1200px) and (min-width: 769px) {
+  .chapter-step-btn {
+    padding: 5px 8px;
+    gap: 4px;
+    font-size: 0.75rem;
+  }
+  .chapter-indicators {
+    gap: 4px;
+  }
 }
 
 .story-progress-bar-wrap {
@@ -1966,60 +1980,384 @@
    ==================================================== */
 
 @media (max-width: 768px) {
+  /* Dynamic top padding so content is NEVER overlapped by header */
   .story-content-main {
-    padding: 85px 14px 40px;
+    padding: 104px 12px 40px;
   }
 
-  .story-chapter {
-    padding: 30px 18px;
-    border-radius: 22px;
+  /* Two-tier app header for mobile: no squished text, no overflow */
+  .story-nav-inner {
+    padding: 8px 12px 6px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "brand actions"
+      "chapters chapters";
+    row-gap: 8px;
+    column-gap: 8px;
+    align-items: center;
   }
 
-  .chapter-title {
-    font-size: 1.7rem;
+  .story-brand {
+    grid-area: brand;
+    min-width: 0;
   }
 
-  .chapter-indicators .step-label {
-    display: none;
+  .brand-badge {
+    font-size: 0.95rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .brand-sub {
     display: none;
   }
 
+  .nav-actions {
+    grid-area: actions;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    justify-content: flex-end;
+  }
+
+  .music-toggle-btn {
+    padding: 5px 10px;
+    font-size: 0.75rem;
+    border-radius: 18px;
+    gap: 4px;
+  }
+
   .music-btn-text {
     display: none;
   }
 
+  .chapter-indicators {
+    grid-area: chapters;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background: rgba(255, 101, 132, 0.08);
+    border-radius: 24px;
+    padding: 3px 4px;
+    gap: 2px;
+  }
+
+  .chapter-step-btn {
+    flex: 1;
+    justify-content: center;
+    padding: 5px 3px;
+    gap: 4px;
+    border-radius: 18px;
+    font-size: 0.72rem;
+    min-width: 0;
+  }
+
+  .chapter-step-btn .step-num {
+    width: 22px;
+    height: 22px;
+    font-size: 0.72rem;
+    flex-shrink: 0;
+  }
+
+  .chapter-step-btn .step-label {
+    display: none;
+  }
+
+  .chapter-step-btn.active {
+    flex: 1.6;
+    background: linear-gradient(135deg, #ff6584, #ff8e53);
+    box-shadow: 0 2px 8px rgba(255, 101, 132, 0.3);
+  }
+
+  .chapter-step-btn.active .step-label {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 70px;
+  }
+
+  /* Story Chapters */
+  .story-chapter {
+    padding: 24px 14px;
+    border-radius: 20px;
+  }
+
+  .chapter-title {
+    font-size: 1.5rem;
+    line-height: 1.25;
+    margin-bottom: 8px;
+  }
+
+  .chapter-lead {
+    font-size: 0.92rem;
+    line-height: 1.55;
+    margin-bottom: 20px;
+  }
+
+  .chapter-pill {
+    font-size: 0.72rem;
+    padding: 4px 12px;
+  }
+
+  .section-subheading {
+    font-size: 1.25rem;
+  }
+
+  /* Hero Section */
+  .intro-hero-split {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .ecg-monitor-card {
+    padding: 16px 12px;
+  }
+
+  .ecg-header {
+    font-size: 0.68rem;
+  }
+
+  .heartbeat-action-btn {
+    width: 100%;
+    font-size: 0.8rem;
+    padding: 10px 8px;
+    justify-content: center;
+  }
+
+  .superpower-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .power-card {
+    padding: 16px 14px;
+  }
+
+  .quote-callout {
+    padding: 18px 14px;
+    margin: 24px 0;
+  }
+
+  /* Chapter 2: Nurse Tribute */
   .nurse-illustration-wrap {
     flex-direction: column;
     text-align: center;
   }
 
   .stetho-heart-svg-wrap {
-    width: 130px;
-    height: 130px;
+    width: 110px;
+    height: 110px;
+  }
+
+  .duality-card {
+    padding: 22px 14px;
+    border-radius: 20px;
+    margin: 28px 0;
+  }
+
+  .duality-header h2 {
+    font-size: 1.45rem;
+  }
+
+  .mode-switcher-wrap {
+    gap: 8px;
+    width: 100%;
+  }
+
+  .mode-tab-button {
+    flex: 1;
+    padding: 10px 8px;
+    font-size: 0.82rem;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  .mode-content-display {
+    padding: 18px 12px;
+  }
+
+  .pamper-buttons-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .pamper-btn {
+    width: 100%;
+    padding: 10px 6px;
+    font-size: 0.8rem;
+    justify-content: center;
+  }
+
+  .pamper-reaction-bubble {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 12px;
+  }
+
+  .pillar-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .pillar-tab-btn {
+    padding: 8px 10px;
+    font-size: 0.78rem;
+    justify-content: center;
+  }
+
+  .pillar-detail-card {
+    padding: 18px 14px;
+  }
+
+  .rx-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+  }
+
+  .rx-paper-texture {
+    padding: 20px 14px;
   }
 
   .rx-patient-info {
     grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .stamp-btn {
+    width: 100%;
+    font-size: 0.82rem;
+  }
+
+  /* Chapter 3 & 4 */
+  .wish-input-row, .add-wish-form {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .cake-stage-layout {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .cake-slice-wedge {
+    right: 0px;
+    transform: scale(0.85);
+  }
+
+  /* Chapter 5: Wishes, Letters, Album */
+  .writing-controls-bar {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 10px 12px;
+    gap: 10px;
+  }
+
+  .writing-action-buttons {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    gap: 6px;
+  }
+
+  .writing-pill-btn {
+    flex: 1;
+    justify-content: center;
+    padding: 6px 8px;
+    font-size: 0.74rem;
+  }
+
+  .parchment-letter {
+    padding: 22px 14px;
+  }
+
+  .salutation {
+    font-size: 1.45rem;
+  }
+
+  .letter-body p {
+    font-size: 0.94rem;
+    line-height: 1.65;
+  }
+
+  .polaroid-album-grid {
+    gap: 16px;
+  }
+
+  .gift-unwrapped-award {
+    padding: 20px 14px;
+  }
+
+  .wishes-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .add-wish-btn {
+    width: 100%;
+  }
+
+  .story-ending-banner {
+    padding: 24px 14px;
+  }
+
+  .story-ending-banner h2 {
+    font-size: 1.3rem;
+  }
+
+  .ending-actions {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
   }
 
   .chapter-actions.dual {
     flex-direction: column;
+    gap: 10px;
   }
 
   .primary-story-btn, .secondary-story-btn {
     width: 100%;
     justify-content: center;
   }
+}
 
-  .wish-input-row, .add-wish-form {
-    flex-direction: column;
+@media (max-width: 480px) {
+  .story-content-main {
+    padding: 100px 10px 40px;
   }
 
-  .cake-slice-wedge {
-    right: -20px;
+  .brand-badge {
+    font-size: 0.88rem;
+  }
+
+  .chapter-step-btn .step-num {
+    width: 20px;
+    height: 20px;
+    font-size: 0.7rem;
+  }
+
+  .chapter-step-btn.active .step-label {
+    max-width: 55px;
+    font-size: 0.65rem;
+  }
+
+  .chapter-title {
+    font-size: 1.35rem;
+  }
+
+  .story-chapter {
+    padding: 18px 10px;
   }
 }
 
@@ -2864,9 +3202,162 @@
 
 @media (max-width: 768px) {
   .release-balloons-pill {
-    bottom: 16px;
-    right: 16px;
-    padding: 8px 14px;
-    font-size: 0.8rem;
+    bottom: 18px;
+    right: 14px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    padding: 0;
+    justify-content: center;
+    box-shadow: 0 4px 16px rgba(255, 101, 132, 0.35);
   }
+  .release-balloons-pill .pill-text {
+    display: none;
+  }
+  .release-balloons-pill .pill-balloon-icon {
+    font-size: 1.35rem;
+    margin: 0;
+  }
+}
+
+/* ====================================================
+   NIGHT SHIFT MODE CONTRAST & TYPOGRAPHY FIXES
+   ==================================================== */
+
+[data-theme="night"] h1,
+[data-theme="night"] h2,
+[data-theme="night"] h3,
+[data-theme="night"] h4,
+[data-theme="night"] .chapter-title,
+[data-theme="night"] .section-subheading,
+[data-theme="night"] .duality-header h2,
+[data-theme="night"] .personal-wish-box h4,
+[data-theme="night"] .card-heading {
+  color: #f8f9fa !important;
+}
+
+[data-theme="night"] p,
+[data-theme="night"] .chapter-lead,
+[data-theme="night"] .section-note,
+[data-theme="night"] .jar-intro,
+[data-theme="night"] .album-intro,
+[data-theme="night"] .duality-subtext,
+[data-theme="night"] .story-global-footer,
+[data-theme="night"] .card-desc,
+[data-theme="night"] .quote-text {
+  color: #c8d6e5 !important;
+}
+
+[data-theme="night"] .story-chapter {
+  background: rgba(18, 22, 44, 0.94) !important;
+  border-color: rgba(255, 101, 132, 0.22) !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5) !important;
+}
+
+[data-theme="night"] .story-nav-header {
+  background: rgba(10, 14, 39, 0.94) !important;
+  border-bottom-color: rgba(255, 101, 132, 0.25) !important;
+}
+
+[data-theme="night"] .brand-badge {
+  color: #ff758c !important;
+}
+
+[data-theme="night"] .power-card {
+  background: rgba(26, 31, 60, 0.95) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+[data-theme="night"] .power-card.open {
+  background: rgba(36, 41, 75, 0.98) !important;
+}
+
+[data-theme="night"] .nurse-hero-banner {
+  background: linear-gradient(135deg, rgba(30, 22, 50, 0.9), rgba(20, 26, 55, 0.9)) !important;
+  border-color: rgba(255, 117, 140, 0.3) !important;
+}
+
+[data-theme="night"] .nurse-tribute-text h3 {
+  color: #ffffff !important;
+}
+
+[data-theme="night"] .nurse-tribute-text p {
+  color: #dfe6e9 !important;
+}
+
+[data-theme="night"] .pillar-detail-card {
+  background: rgba(26, 31, 60, 0.95) !important;
+}
+
+[data-theme="night"] .pillar-heading {
+  color: #ffffff !important;
+}
+
+[data-theme="night"] .pillar-text {
+  color: #c8d6e5 !important;
+}
+
+[data-theme="night"] .duality-card {
+  background: linear-gradient(135deg, rgba(22, 26, 52, 0.95), rgba(30, 24, 48, 0.95)) !important;
+  border-color: rgba(255, 101, 132, 0.3) !important;
+}
+
+[data-theme="night"] .mode-content-display {
+  background: rgba(16, 20, 42, 0.95) !important;
+}
+
+[data-theme="night"] .mode-trait-list strong {
+  color: #ffffff !important;
+}
+
+[data-theme="night"] .mode-trait-list span {
+  color: #b2bec3 !important;
+}
+
+[data-theme="night"] .single-wish-card {
+  background: rgba(26, 31, 60, 0.95) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+[data-theme="night"] .single-wish-card .wish-content {
+  color: #f1f2f6 !important;
+}
+
+[data-theme="night"] .parchment-letter {
+  background: #1c2035 !important;
+  border-color: #3d3b55 !important;
+}
+
+[data-theme="night"] .parchment-letter .letter-body p {
+  color: #e8e8f0 !important;
+}
+
+[data-theme="night"] .salutation {
+  color: #ff758c !important;
+}
+
+[data-theme="night"] .personal-wish-box {
+  background: rgba(26, 31, 60, 0.85) !important;
+}
+
+[data-theme="night"] .memory-album-section {
+  background: linear-gradient(135deg, rgba(26, 31, 60, 0.85), rgba(35, 25, 48, 0.85)) !important;
+  border-color: rgba(255, 101, 132, 0.3) !important;
+}
+
+[data-theme="night"] .secondary-story-btn {
+  background: rgba(255, 255, 255, 0.12) !important;
+  color: #ffffff !important;
+}
+
+[data-theme="night"] .secondary-story-btn:hover {
+  background: rgba(255, 255, 255, 0.22) !important;
+}
+
+[data-theme="night"] .secret-envelope-wrapper-section .section-subheading {
+  color: #f8f9fa !important;
+}
+
+[data-theme="night"] .secret-envelope-wrapper-section .section-note {
+  color: #c8d6e5 !important;
 }

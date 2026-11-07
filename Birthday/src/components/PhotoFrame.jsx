@@ -50,7 +50,7 @@ const PhotoFrame = ({
 
   const handleRemovePhoto = (e) => {
     e.stopPropagation();
-    setPhotoSrc(null);
+    setPhotoSrc(defaultImage || null);
     try {
       localStorage.removeItem(`debalina_photo_${id}`);
     } catch (err) {

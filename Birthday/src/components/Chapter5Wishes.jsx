@@ -1,6 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
 import { playSparkleSound, playCelebrationChime, playPenScratchSound } from '../utils/audio';
 import PhotoFrame from './PhotoFrame';
+import PhotoStickerBooth from './PhotoStickerBooth';
+import img1 from '../assets/Deb/img1.jpg';
+import img2 from '../assets/Deb/img2.jpg';
+import img4 from '../assets/Deb/img4.jpg';
 
 const FULL_LETTER_TEXT = `They say that while medicine puts days into life, nurses put life into days. On this special 8th of November, we pause to celebrate you, Debalina—the calm anchor when families are anxious, the soothing voice in cold hospital corridors, and the tender hand that heals with boundless grace.
 
@@ -13,23 +17,15 @@ Today, on November 8th, the charts are set aside, the call bells are silenced, a
 Happy Birthday, our favorite nurse & forever little kiddo! 💖
 With endless warmth, adoration, and pride.`;
 
-const Chapter5Wishes = ({ onRestart, onPrev, triggerConfetti }) => {
+const Chapter5Wishes = ({ onNext, onRestart, onPrev, triggerConfetti }) => {
   const [letterOpen, setLetterOpen] = useState(true);
   const [giftOpen, setGiftOpen] = useState(false);
-  const [userWish, setUserWish] = useState('');
   
   // Writing animation state
   const [displayedLength, setDisplayedLength] = useState(0);
   const [isWriting, setIsWriting] = useState(true);
   const [soundEnabled, setSoundEnabled] = useState(true);
   const intervalRef = useRef(null);
-
-  const [wishes, setWishes] = useState([
-    { id: 1, text: 'Happy 8th November, Debalina! May your night shifts be calm and your coffee warm! ☕🌸', sender: 'Fellow Healthcare Admirer' },
-    { id: 2, text: 'Debalina, never lose your adorable childlike smile—it heals hearts faster than any medicine! 🧸💖', sender: 'From the Heart' },
-    { id: 3, text: 'On this 8th of November, may you receive all the chocolates and pampering you deserve! 🍫✨', sender: 'True Friend' },
-    { id: 4, text: 'Happy Birthday to our favorite angel in scrubs & forever cute kiddo! 🩺🌸', sender: 'With Love' },
-  ]);
 
   // Handle live writing typewriter animation
   useEffect(() => {
@@ -76,25 +72,6 @@ const Chapter5Wishes = ({ onRestart, onPrev, triggerConfetti }) => {
     playCelebrationChime();
     if (triggerConfetti) {
       triggerConfetti(window.innerWidth / 2, window.innerHeight * 0.5, 120);
-    }
-  };
-
-  const handleAddWish = (e) => {
-    e.preventDefault();
-    if (!userWish.trim()) return;
-
-    playSparkleSound();
-    const newEntry = {
-      id: Date.now(),
-      text: userWish.trim(),
-      sender: 'Special 8th Nov Guest',
-    };
-
-    setWishes([newEntry, ...wishes]);
-    setUserWish('');
-
-    if (triggerConfetti) {
-      triggerConfetti(window.innerWidth / 2, window.innerHeight * 0.7, 40);
     }
   };
 
@@ -208,6 +185,7 @@ const Chapter5Wishes = ({ onRestart, onPrev, triggerConfetti }) => {
             subtitle="Bringing joy everywhere"
             placeholderIcon="✨"
             placeholderGradient="linear-gradient(135deg, #ffd1dc, #ffccd5)"
+            defaultImage={img1}
             rotation={-3}
             size="medium"
           />
@@ -217,6 +195,7 @@ const Chapter5Wishes = ({ onRestart, onPrev, triggerConfetti }) => {
             subtitle="Compassion that inspires"
             placeholderIcon="👩‍⚕️"
             placeholderGradient="linear-gradient(135deg, #c7ecee, #7ed6df)"
+            defaultImage={img2}
             rotation={2.5}
             size="medium"
           />
@@ -226,10 +205,14 @@ const Chapter5Wishes = ({ onRestart, onPrev, triggerConfetti }) => {
             subtitle="Forever our cute kiddo"
             placeholderIcon="🧸"
             placeholderGradient="linear-gradient(135deg, #ffeaa7, #fab1a0)"
+            defaultImage={img4}
             rotation={-1.5}
             size="medium"
           />
         </div>
+
+        {/* Debalina's Interactive Photo Sticker Booth */}
+        <PhotoStickerBooth triggerConfetti={triggerConfetti} />
       </div>
 
       {/* Interactive Virtual Gift Box */}
@@ -264,36 +247,7 @@ const Chapter5Wishes = ({ onRestart, onPrev, triggerConfetti }) => {
         </div>
       </div>
 
-      {/* Wishes Jar & Community Notes */}
-      <div className="wishes-jar-section">
-        <h2 className="section-subheading">✨ The Glowing 8th November Wish Jar</h2>
-        <p className="jar-intro">Leave a permanent note of love, encouragement, or gratitude in Debalina's jar:</p>
-
-        <form className="add-wish-form" onSubmit={handleAddWish}>
-          <input
-            type="text"
-            className="add-wish-input"
-            placeholder="Write an 8th November birthday message or pampering wish..."
-            value={userWish}
-            onChange={(e) => setUserWish(e.target.value)}
-          />
-          <button type="submit" className="add-wish-btn">
-            <span>Drop in Jar ✨</span>
-          </button>
-        </form>
-
-        <div className="wishes-cards-grid">
-          {wishes.map((w) => (
-            <div key={w.id} className="single-wish-card">
-              <span className="wish-quote-symbol">❝</span>
-              <p className="wish-content">{w.text}</p>
-              <span className="wish-author">— {w.sender}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Final Story Ending & Restart Button */}
+      {/* Chapter 5 Navigation Banner */}
       <div className="story-ending-banner">
         <div className="ending-flowers">🌸 🩺 🧸 🎂 💖 🌸</div>
         <h2>“Here’s to another magnificent year of saving lives and being our favorite little kiddo!”</h2>
@@ -303,8 +257,12 @@ const Chapter5Wishes = ({ onRestart, onPrev, triggerConfetti }) => {
             <span className="btn-arrow">⬅</span>
             <span>Back to Cake Cutting</span>
           </button>
-          <button className="primary-story-btn replay-btn" onClick={onRestart}>
-            <span>↺ Read Story From Chapter I</span>
+          <button className="primary-story-btn next-chapter-btn" onClick={onNext}>
+            <span>Continue to Chapter VI: Sealed Keepsake</span>
+            <span className="btn-arrow">➡</span>
+          </button>
+          <button className="secondary-story-btn replay-btn" onClick={onRestart}>
+            <span>↺ Chapter I</span>
           </button>
         </div>
       </div>

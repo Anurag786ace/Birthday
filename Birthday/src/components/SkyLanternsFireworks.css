@@ -1,0 +1,449 @@
+/* SkyLanternsFireworks.css - Tangled-Style Glowing Sky Lanterns & Fireworks */
+
+.sky-lanterns-section {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  margin: 45px auto;
+  border-radius: 28px;
+  background: linear-gradient(180deg, rgba(16, 20, 48, 0.95) 0%, rgba(8, 12, 30, 0.98) 100%);
+  border: 1px solid rgba(255, 215, 0, 0.25);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(255, 180, 70, 0.15);
+  padding: 32px 24px 28px;
+  overflow: hidden;
+  box-sizing: border-box;
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+[data-theme='day'] .sky-lanterns-section {
+  background: linear-gradient(180deg, #1b2046 0%, #0d122c 100%);
+  border-color: rgba(255, 200, 100, 0.3);
+}
+
+.sky-header {
+  text-align: center;
+  margin-bottom: 22px;
+}
+
+.sky-badge {
+  display: inline-block;
+  padding: 6px 18px;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  background: rgba(255, 215, 0, 0.15);
+  border: 1px solid rgba(255, 215, 0, 0.35);
+  color: #ffd97d;
+  margin-bottom: 10px;
+  backdrop-filter: blur(8px);
+}
+
+.sky-title {
+  font-size: 1.85rem;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 700;
+  background: linear-gradient(135deg, #fff2cc 0%, #ffd97d 50%, #ffab40 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0 0 8px 0;
+}
+
+.sky-subtext {
+  font-size: 0.95rem;
+  color: #c9d1d9;
+  max-width: 650px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+/* ==================== Interactive Sky Viewport ==================== */
+.sky-viewport {
+  position: relative;
+  width: 100%;
+  height: 480px;
+  border-radius: 20px;
+  background: radial-gradient(ellipse at 50% 100%, #1c234a 0%, #0d1024 60%, #060814 100%);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.8);
+  cursor: crosshair;
+  user-select: none;
+}
+
+.fireworks-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* Stars backdrop */
+.sky-stars-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.twinkle-star {
+  position: absolute;
+  background: #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.9);
+  animation: starTwinkle 2.5s infinite ease-in-out alternate;
+}
+
+@keyframes starTwinkle {
+  0% { opacity: 0.2; transform: scale(0.8); }
+  100% { opacity: 1; transform: scale(1.3); }
+}
+
+/* Horizon Ambient Glow */
+.sky-horizon-glow {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 90px;
+  background: linear-gradient(to top, rgba(255, 140, 50, 0.18), transparent);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ==================== Floating Tangled-Style Sky Lanterns ==================== */
+.lanterns-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.paper-lantern {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: lanternGentleSway 4s ease-in-out infinite alternate,
+             lanternAscend var(--rise-duration, 18s) linear infinite;
+  animation-delay: 0s, var(--rise-delay, 0s);
+  will-change: transform, opacity;
+}
+
+@keyframes lanternGentleSway {
+  0% { transform: rotate(-3deg) translateX(-4px); }
+  100% { transform: rotate(3deg) translateX(4px); }
+}
+
+@keyframes lanternAscend {
+  0% {
+    transform: translateY(140px) scale(var(--scale, 0.85));
+    opacity: 0;
+  }
+  8% {
+    opacity: 0.95;
+  }
+  85% {
+    opacity: 0.92;
+  }
+  100% {
+    transform: translateY(-560px) scale(calc(var(--scale, 0.85) * 0.72));
+    opacity: 0;
+  }
+}
+
+.lantern-balloon {
+  position: relative;
+  width: 90px;
+  height: 110px;
+  background: linear-gradient(180deg, #ffe082 0%, #ffb300 45%, #ff8f00 80%, #e65100 100%);
+  border-radius: 45px 45px 24px 24px;
+  box-shadow: 0 0 25px var(--lantern-glow, #ffb300),
+              inset 0 0 15px rgba(255, 255, 255, 0.4),
+              inset 0 -15px 25px rgba(180, 50, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 8px;
+  box-sizing: border-box;
+  overflow: hidden;
+  border: 1px solid rgba(255, 235, 150, 0.6);
+}
+
+/* Subtle vertical crease lines resembling Japanese rice-paper lanterns */
+.lantern-crease {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: rgba(180, 70, 0, 0.2);
+}
+.crease-left { left: 28%; }
+.crease-right { right: 28%; }
+
+/* Flickering inner candle flame */
+.lantern-flame {
+  position: absolute;
+  bottom: 12px;
+  width: 14px;
+  height: 22px;
+  background: radial-gradient(ellipse at bottom, #ffffff 0%, #fff7b2 40%, #ff6f00 90%);
+  border-radius: 50% 50% 35% 35%;
+  box-shadow: 0 0 18px #fff, 0 0 30px #ffa000;
+  animation: flameFlicker 1.2s infinite alternate ease-in-out;
+}
+
+@keyframes flameFlicker {
+  0% { transform: scale(0.9) rotate(-2deg); opacity: 0.9; }
+  50% { transform: scale(1.1) rotate(2deg); opacity: 1; }
+  100% { transform: scale(0.95) rotate(-1deg); opacity: 0.92; }
+}
+
+.lantern-wish-text {
+  position: relative;
+  z-index: 2;
+  font-size: 0.65rem;
+  font-family: 'Great Vibes', 'Caveat', cursive, serif;
+  font-weight: 700;
+  color: #4a1500;
+  text-shadow: 0 1px 2px rgba(255, 245, 200, 0.8);
+  text-align: center;
+  line-height: 1.15;
+  padding: 0 4px;
+  user-select: none;
+}
+
+.lantern-base {
+  position: relative;
+  width: 48px;
+  height: 6px;
+  background: #8d4f00;
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+.lantern-tassel {
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 12px;
+  background: #d84315;
+  box-shadow: 0 0 6px rgba(255, 100, 0, 0.5);
+}
+
+/* Hint overlay */
+.sky-click-hint {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(10, 15, 30, 0.7);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  border-radius: 20px;
+  padding: 5px 16px;
+  font-size: 0.8rem;
+  color: #ffd97d;
+  pointer-events: none;
+  backdrop-filter: blur(6px);
+  z-index: 6;
+  white-space: nowrap;
+}
+
+/* ==================== Controls Station ==================== */
+.sky-controls-card {
+  margin-top: 22px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 18px;
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.wish-input-form {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.input-group-lantern {
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon {
+  position: absolute;
+  left: 14px;
+  font-size: 1.1rem;
+  pointer-events: none;
+}
+
+.lantern-text-input {
+  width: 100%;
+  padding: 12px 14px 12px 42px;
+  background: rgba(12, 16, 36, 0.85);
+  border: 1px solid rgba(255, 215, 0, 0.35);
+  border-radius: 12px;
+  color: #fff;
+  font-size: 0.95rem;
+  outline: none;
+  transition: all 0.25s ease;
+  box-sizing: border-box;
+}
+
+.lantern-text-input:focus {
+  border-color: #ffd700;
+  box-shadow: 0 0 12px rgba(255, 215, 0, 0.35);
+  background: rgba(15, 20, 48, 0.95);
+}
+
+.lantern-text-input::placeholder {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.launch-lantern-btn {
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #ff9a44 0%, #fc6076 100%);
+  border: none;
+  border-radius: 12px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(252, 96, 118, 0.35);
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.launch-lantern-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(252, 96, 118, 0.5);
+  filter: brightness(1.08);
+}
+
+.action-buttons-row {
+  display: flex;
+  justify-content: center;
+}
+
+.grand-finale-btn {
+  width: 100%;
+  padding: 14px 28px;
+  background: linear-gradient(135deg, #ffd700 0%, #ff8c00 50%, #e91e63 100%);
+  border: none;
+  border-radius: 14px;
+  color: #1a0a2a;
+  font-weight: 800;
+  font-size: 1.05rem;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  box-shadow: 0 8px 25px rgba(255, 180, 0, 0.4), 0 0 35px rgba(233, 30, 99, 0.25);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.grand-finale-btn:hover:not(:disabled) {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(255, 180, 0, 0.55), 0 0 45px rgba(233, 30, 99, 0.4);
+}
+
+.grand-finale-btn.running {
+  opacity: 0.8;
+  animation: pulseButton 1s infinite alternate ease-in-out;
+}
+
+@keyframes pulseButton {
+  0% { transform: scale(1); filter: brightness(1); }
+  100% { transform: scale(1.02); filter: brightness(1.2); }
+}
+
+/* Toast Message */
+.sky-toast {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(20, 24, 48, 0.95);
+  border: 1px solid #ffd700;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 215, 0, 0.3);
+  border-radius: 30px;
+  padding: 10px 24px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #fff;
+  z-index: 100;
+  animation: toastPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes toastPop {
+  0% { transform: translate(-50%, 20px); opacity: 0; }
+  100% { transform: translate(-50%, 0); opacity: 1; }
+}
+
+@media (max-width: 650px) {
+  .sky-lanterns-section {
+    padding: 20px 14px;
+    border-radius: 20px;
+    margin: 32px auto;
+  }
+  .sky-viewport {
+    height: 360px;
+  }
+  .sky-title {
+    font-size: 1.4rem;
+  }
+  .sky-subtext {
+    font-size: 0.85rem;
+  }
+  .sky-click-hint {
+    white-space: normal;
+    max-width: 90%;
+    text-align: center;
+    font-size: 0.72rem;
+    padding: 4px 12px;
+  }
+  .wish-input-form {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .launch-lantern-btn {
+    width: 100%;
+    padding: 10px 18px;
+    font-size: 0.88rem;
+  }
+  .grand-finale-btn {
+    font-size: 0.95rem;
+    padding: 12px 18px;
+  }
+}
+
+@media (max-width: 420px) {
+  .sky-viewport {
+    height: 310px;
+  }
+  .sky-title {
+    font-size: 1.25rem;
+  }
+  .paper-lantern {
+    transform-origin: center bottom;
+  }
+}
+

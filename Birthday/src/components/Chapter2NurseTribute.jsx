@@ -1,8 +1,12 @@
 import { useState } from 'react';
 import { playHeartbeatSound, playSparkleSound } from '../utils/audio';
 import PhotoFrame from './PhotoFrame';
+import LullabyMode from './LullabyMode';
+import FirstAidKit from './FirstAidKit';
+import DayNightStoryGame from './DayNightStoryGame';
+import img2 from '../assets/Deb/img2.jpg';
 
-const Chapter2NurseTribute = ({ onNext, onPrev }) => {
+const Chapter2NurseTribute = ({ onNext, onPrev, triggerConfetti }) => {
   const [stampActive, setStampActive] = useState(false);
   const [selectedPillar, setSelectedPillar] = useState(0);
   const [activeMode, setActiveMode] = useState('kiddo'); // default to kiddo so user sees it right away!
@@ -50,8 +54,8 @@ const Chapter2NurseTribute = ({ onNext, onPrev }) => {
       setPamperStatus('🍫 Chocolate Fed! Debalina’s cute pout instantly melted into the biggest smile! 🥰');
     } else if (type === 'plushie') {
       setPamperStatus('🧸 Soft Teddy Handed! She is hugging it tightly like an adorable 5-year-old! 💕');
-    } else if (type === 'forehead') {
-      setPamperStatus('💆‍♀️ Forehead Kiss & Head Pat Given! Debalina is blushing and doing a happy wiggle! ✨');
+    } else if (type === 'headpat') {
+      setPamperStatus('💆‍♀️ Gentle Head Pat Given! Debalina is blushing and doing an adorable happy wiggle! ✨');
     } else if (type === 'icecream') {
       setPamperStatus('🍦 Ice Cream Secured! Zero nurse seriousness detected, 100% baby happiness! 🍭');
     }
@@ -83,6 +87,7 @@ const Chapter2NurseTribute = ({ onNext, onPrev }) => {
               subtitle="Debalina • Healing with Love"
               placeholderIcon="🩺"
               placeholderGradient="linear-gradient(135deg, #c7ecee, #7ed6df)"
+              defaultImage={img2}
               rotation={2}
               size="medium"
             />
@@ -160,7 +165,7 @@ const Chapter2NurseTribute = ({ onNext, onPrev }) => {
             }}
           >
             <span className="mode-tab-icon">🩺</span>
-            <span className="mode-tab-label">Hospital Mode (The World Sees)</span>
+            <span className="mode-tab-label">Hospital Mode</span>
           </button>
           <button
             className={`mode-tab-button kiddo ${activeMode === 'kiddo' ? 'active' : ''}`}
@@ -170,7 +175,7 @@ const Chapter2NurseTribute = ({ onNext, onPrev }) => {
             }}
           >
             <span className="mode-tab-icon">🧸</span>
-            <span className="mode-tab-label">Kiddo Mode (Only In Front of You)</span>
+            <span className="mode-tab-label">Kiddo Mode</span>
           </button>
         </div>
 
@@ -229,7 +234,7 @@ const Chapter2NurseTribute = ({ onNext, onPrev }) => {
                   <span className="trait-icon">🧸</span>
                   <div>
                     <strong>Precious Childlike Giggles:</strong>
-                    <span>Behind the scrubs is a sweet, innocent child who loves cuddles, fairy lights, and forehead kisses.</span>
+                    <span>Behind the scrubs is a sweet, innocent child who loves warm hugs, fairy lights, and gentle head pats.</span>
                   </div>
                 </li>
               </ul>
@@ -244,8 +249,8 @@ const Chapter2NurseTribute = ({ onNext, onPrev }) => {
                   <button className="pamper-btn" onClick={() => handlePamper('plushie')}>
                     <span>🧸 Hand Soft Teddy</span>
                   </button>
-                  <button className="pamper-btn" onClick={() => handlePamper('forehead')}>
-                    <span>💆‍♀️ Forehead Kiss</span>
+                  <button className="pamper-btn" onClick={() => handlePamper('headpat')}>
+                    <span>💆‍♀️ Gentle Head Pat</span>
                   </button>
                   <button className="pamper-btn" onClick={() => handlePamper('icecream')}>
                     <span>🍦 Buy Ice Cream</span>
@@ -257,10 +262,16 @@ const Chapter2NurseTribute = ({ onNext, onPrev }) => {
                   <span className="pamper-counter">Pampers given today: {pamperCount} ❤️</span>
                 </div>
               </div>
+
+              {/* Lullaby Mode with Rocking Teddy Bear */}
+              <LullabyMode />
             </div>
           )}
         </div>
       </div>
+
+      {/* Interactive Story Adventure: Nurse by Day, Kiddo by Night */}
+      <DayNightStoryGame triggerConfetti={triggerConfetti} />
 
       {/* Interactive Pillars Carousel / Tabs */}
       <div className="pillars-container">
@@ -335,7 +346,7 @@ const Chapter2NurseTribute = ({ onNext, onPrev }) => {
             <div className="rx-item">
               <span className="bullet">✦</span>
               <div className="item-text">
-                <strong>Infusion of Kiddo Pampering & Forehead Kisses (Continuous):</strong>
+                <strong>Infusion of Kiddo Pampering & Warm Hugs (Continuous):</strong>
                 <span>Mandatory head pats, agreeing to all her adorable demands, and loving her drama endlessly.</span>
               </div>
             </div>
@@ -359,6 +370,9 @@ const Chapter2NurseTribute = ({ onNext, onPrev }) => {
           </div>
         </div>
       </div>
+
+      {/* Debalina's Emergency Care & Pamper First-Aid Kit */}
+      <FirstAidKit />
 
       {/* Navigation */}
       <div className="chapter-actions dual">

@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { playHeartbeatSound, playSparkleSound } from '../utils/audio';
 import PhotoFrame from './PhotoFrame';
+import NurseIdBadge from './NurseIdBadge';
+import img1 from '../assets/Deb/img1.jpg';
 
 const Chapter1Intro = ({ onNext }) => {
   const [pulseActive, setPulseActive] = useState(false);
@@ -77,6 +79,7 @@ const Chapter1Intro = ({ onNext }) => {
             subtitle="The Birthday Girl • 8th Nov"
             placeholderIcon="👩‍⚕️"
             placeholderGradient="linear-gradient(135deg, #ffd1dc, #ff9ebb)"
+            defaultImage={img1}
             rotation={-2}
             size="large"
           />
@@ -154,6 +157,9 @@ const Chapter1Intro = ({ onNext }) => {
           })}
         </div>
       </div>
+
+      {/* Official 3D Flippable Nurse ID Badge */}
+      <NurseIdBadge />
 
       {/* Story Quote Callout */}
       <div className="quote-callout">

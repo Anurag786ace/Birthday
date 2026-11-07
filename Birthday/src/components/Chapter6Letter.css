@@ -1,0 +1,464 @@
+/* ====================================================
+   CHAPTER 6: THE UNSPOKEN HEART & REAL-TIME LETTER
+   ==================================================== */
+
+.chapter-heartfelt-letter {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  animation: chapterFadeIn 0.6s ease-out;
+}
+
+@keyframes chapterFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.heartfelt-intro-card {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.heartfelt-tagline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 18px;
+  border-radius: 20px;
+  background: rgba(255, 101, 132, 0.12);
+  color: var(--color-primary-dark, #ff4757);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin-top: 10px;
+}
+
+/* Photo and Letter Layout */
+.heartfelt-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  margin-bottom: 40px;
+}
+
+/* Diary / Parchment Letter Container */
+.diary-parchment-letter {
+  position: relative;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 28px,
+      rgba(100, 150, 220, 0.12) 28px,
+      rgba(100, 150, 220, 0.12) 29px
+    ),
+    linear-gradient(180deg, #fffdf8 0%, #fbf5e6 100%);
+  border: 1.5px solid #ded3be;
+  border-radius: 20px;
+  padding: 42px 42px 36px 56px;
+  box-shadow:
+    0 16px 42px rgba(0, 0, 0, 0.08),
+    0 2px 8px rgba(0, 0, 0, 0.04),
+    inset 0 0 40px rgba(243, 156, 18, 0.04);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+/* Left margin line (Notebook style) */
+.diary-notebook-margin {
+  position: absolute;
+  top: 0;
+  left: 42px;
+  width: 2px;
+  height: 100%;
+  background: rgba(235, 77, 75, 0.35);
+}
+
+/* Letter Header with Monogram Seal */
+.diary-letter-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  border-bottom: 1px dashed rgba(220, 160, 100, 0.45);
+  padding-bottom: 18px;
+  margin-bottom: 24px;
+}
+
+.diary-seal-wrap {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.diary-wax-seal {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 32%, #e74c3c 0%, #b3122c 50%, #780d1e 85%, #520512 100%);
+  box-shadow:
+    0 4px 14px rgba(120, 13, 30, 0.5),
+    inset 0 2px 4px rgba(255, 255, 255, 0.35),
+    inset 0 -2px 5px rgba(0, 0, 0, 0.4);
+  border: 2px solid rgba(255, 225, 140, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffeaa7;
+  font-family: 'Playfair Display', 'Cinzel', Georgia, serif;
+  font-size: 24px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  user-select: none;
+}
+
+.diary-wax-seal:hover {
+  transform: scale(1.1) rotate(6deg);
+  box-shadow: 0 6px 18px rgba(179, 18, 44, 0.65), 0 0 14px rgba(255, 215, 0, 0.4);
+}
+
+.diary-salutation {
+  display: block;
+  font-family: var(--font-cursive, 'Dancing Script', cursive);
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: #c0392b;
+  line-height: 1.2;
+}
+
+.diary-date-badge {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #8854d0;
+  background: rgba(136, 84, 208, 0.1);
+  padding: 4px 12px;
+  border-radius: 12px;
+  letter-spacing: 0.3px;
+}
+
+/* Handwritten letter text body */
+.diary-letter-body {
+  position: relative;
+  z-index: 2;
+}
+
+.diary-para {
+  font-family: var(--font-cursive, 'Dancing Script', cursive);
+  font-size: 1.35rem;
+  line-height: 1.95;
+  color: #2b1d16;
+  margin-bottom: 20px;
+  text-indent: 1.5em;
+  word-break: break-word;
+}
+
+.diary-para:first-of-type {
+  font-size: 1.45rem;
+  font-weight: 600;
+  color: #a32230;
+  text-indent: 0;
+}
+
+/* Sign-off / Warm Ending */
+.diary-signoff-block {
+  margin-top: 28px;
+  padding-top: 18px;
+  border-top: 1px dashed rgba(220, 160, 100, 0.45);
+}
+
+.diary-signoff-wish {
+  font-family: var(--font-cursive, 'Dancing Script', cursive);
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: #c0392b;
+  margin-bottom: 10px;
+}
+
+.diary-signoff-text {
+  font-family: var(--font-cursive, 'Dancing Script', cursive);
+  font-size: 1.25rem;
+  font-style: italic;
+  color: #5a3818;
+  line-height: 1.6;
+}
+
+/* ====================================================
+   INTERACTIVE EMOTION & COMFORT PILLS
+   ==================================================== */
+
+.comfort-actions-section {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  border: 1.5px solid rgba(255, 101, 132, 0.22);
+  border-radius: 20px;
+  padding: 24px;
+  text-align: center;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.05);
+  margin-bottom: 36px;
+}
+
+.comfort-actions-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #2d3436;
+  margin-bottom: 8px;
+}
+
+.comfort-actions-sub {
+  font-size: 0.88rem;
+  color: #636e72;
+  margin-bottom: 18px;
+}
+
+.comfort-buttons-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.comfort-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  border-radius: 30px;
+  border: 1.5px solid rgba(255, 101, 132, 0.3);
+  background: #ffffff;
+  color: #2d3436;
+  font-size: 0.92rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+}
+
+.comfort-action-btn:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 8px 22px rgba(255, 101, 132, 0.25);
+  border-color: #ff6584;
+  background: linear-gradient(135deg, #fff5f7, #ffffff);
+}
+
+.comfort-action-btn:active {
+  transform: scale(0.96);
+}
+
+.comfort-feedback-pill {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 8px 20px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, rgba(255, 101, 132, 0.15), rgba(132, 94, 194, 0.15));
+  color: #c0392b;
+  font-weight: 700;
+  font-size: 0.92rem;
+  animation: feedbackPop 0.4s ease-out;
+}
+
+@keyframes feedbackPop {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Floating comfort emoji animations */
+.floating-comfort-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.floating-comfort-item {
+  position: absolute;
+  animation: comfortFloatUp 3s ease-out forwards;
+  opacity: 0;
+}
+
+@keyframes comfortFloatUp {
+  0% { opacity: 0; transform: translateY(0) scale(0.6); }
+  20% { opacity: 1; transform: translateY(-40px) scale(1.2); }
+  80% { opacity: 0.9; }
+  100% { opacity: 0; transform: translateY(-380px) scale(1.5) rotate(20deg); }
+}
+
+/* Debalina's Soft Soul Spotlight Photo */
+.soft-soul-photo-wrap {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0 24px;
+}
+
+.soft-soul-polaroid {
+  background: #ffffff;
+  padding: 12px 12px 20px 12px;
+  border-radius: 12px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  max-width: 290px;
+  text-align: center;
+  transform: rotate(-1.5deg);
+  transition: transform 0.3s ease;
+}
+
+.soft-soul-polaroid:hover {
+  transform: rotate(0deg) scale(1.02);
+}
+
+.soft-soul-img {
+  width: 100%;
+  height: 270px;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+}
+
+.soft-soul-caption {
+  font-family: var(--font-cursive, 'Dancing Script', cursive);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #c0392b;
+  margin-top: 12px;
+}
+
+/* ====================================================
+   NIGHT THEME ADAPTATIONS
+   ==================================================== */
+
+[data-theme="night"] .diary-parchment-letter {
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 28px,
+      rgba(255, 255, 255, 0.035) 28px,
+      rgba(255, 255, 255, 0.035) 29px
+    ),
+    linear-gradient(180deg, #1f1b2e 0%, #171324 100%);
+  border-color: rgba(255, 101, 132, 0.28);
+  box-shadow: 0 16px 42px rgba(0, 0, 0, 0.45);
+}
+
+[data-theme="night"] .diary-notebook-margin {
+  background: rgba(255, 101, 132, 0.35);
+}
+
+[data-theme="night"] .diary-para {
+  color: #f1f2f6;
+}
+
+[data-theme="night"] .diary-salutation {
+  color: #ff7675;
+}
+
+[data-theme="night"] .diary-signoff-wish {
+  color: #ff7675;
+}
+
+[data-theme="night"] .diary-signoff-text {
+  color: #dfe6e9;
+}
+
+[data-theme="night"] .comfort-actions-section {
+  background: rgba(30, 25, 45, 0.85);
+  border-color: rgba(255, 101, 132, 0.28);
+}
+
+[data-theme="night"] .comfort-actions-title {
+  color: #f5f6fa;
+}
+
+[data-theme="night"] .comfort-action-btn {
+  background: #251f38;
+  color: #f5f6fa;
+  border-color: rgba(255, 101, 132, 0.35);
+}
+
+[data-theme="night"] .soft-soul-polaroid {
+  background: #241e35;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* ====================================================
+   MOBILE RESPONSIVENESS
+   ==================================================== */
+
+@media (max-width: 600px) {
+  .diary-parchment-letter {
+    padding: 30px 20px 24px 38px;
+    border-radius: 16px;
+  }
+
+  .diary-notebook-margin {
+    left: 26px;
+  }
+
+  .diary-salutation {
+    font-size: 1.7rem;
+  }
+
+  .diary-para {
+    font-size: 1.15rem;
+    line-height: 1.75;
+    margin-bottom: 16px;
+    text-indent: 1.1em;
+  }
+
+  .diary-para:first-of-type {
+    font-size: 1.25rem;
+  }
+
+  .diary-signoff-wish {
+    font-size: 1.45rem;
+  }
+
+  .diary-signoff-text {
+    font-size: 1.1rem;
+  }
+
+  .comfort-buttons-grid {
+    gap: 8px;
+  }
+
+  .comfort-action-btn {
+    padding: 8px 16px;
+    font-size: 0.82rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .diary-parchment-letter {
+    padding: 24px 14px 20px 30px;
+  }
+
+  .diary-notebook-margin {
+    left: 20px;
+  }
+
+  .diary-salutation {
+    font-size: 1.45rem;
+  }
+
+  .diary-para {
+    font-size: 1.05rem;
+    line-height: 1.62;
+    text-indent: 0.8em;
+  }
+
+  .diary-wax-seal {
+    width: 44px;
+    height: 44px;
+    font-size: 20px;
+  }
+}
+

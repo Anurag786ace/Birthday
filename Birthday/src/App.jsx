@@ -4,12 +4,16 @@ import './App.css';
 import ConfettiCanvas from './components/ConfettiCanvas';
 import FloatingHearts from './components/FloatingHearts';
 import FloatingBalloons from './components/FloatingBalloons';
+import StethoscopeLoader from './components/StethoscopeLoader';
 import ChapterNav from './components/ChapterNav';
 import Chapter1Intro from './components/Chapter1Intro';
 import Chapter2NurseTribute from './components/Chapter2NurseTribute';
 import Chapter3Candle from './components/Chapter3Candle';
 import Chapter4CakeCut from './components/Chapter4CakeCut';
 import Chapter5Wishes from './components/Chapter5Wishes';
+import Chapter6Keepsake from './components/Chapter6Keepsake';
+import Chapter7Letter from './components/Chapter7Letter';
+import Chapter8Letter from './components/Chapter8Letter';
 
 import {
   startBdayMusic,
@@ -21,6 +25,7 @@ import {
 
 function App() {
   const [currentChapter, setCurrentChapter] = useState(1);
+  const [transitioning, setTransitioning] = useState(false);
   const [musicActive, setMusicActive] = useState(false);
   const confettiRef = useRef(null);
 
@@ -30,24 +35,35 @@ function App() {
     'Candle & Wish',
     'Cake Cutting',
     'Wishes & Gifts',
+    'Sealed Keepsake',
+    'From The Heart',
+    'A Promise To You',
   ];
 
-  const handleNext = () => {
+  const navigateToChapter = (targetChapter) => {
+    if (targetChapter === currentChapter) return;
     playSparkleSound();
-    setCurrentChapter((prev) => Math.min(prev + 1, 5));
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setTransitioning(true);
+
+    setTimeout(() => {
+      setCurrentChapter(targetChapter);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setTimeout(() => {
+        setTransitioning(false);
+      }, 500);
+    }, 700);
+  };
+
+  const handleNext = () => {
+    navigateToChapter(Math.min(currentChapter + 1, 8));
   };
 
   const handlePrev = () => {
-    playSparkleSound();
-    setCurrentChapter((prev) => Math.max(prev - 1, 1));
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    navigateToChapter(Math.max(currentChapter - 1, 1));
   };
 
   const handleRestart = () => {
-    playSparkleSound();
-    setCurrentChapter(1);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    navigateToChapter(1);
   };
 
   const handleToggleMusic = () => {
@@ -90,13 +106,13 @@ function App() {
       {/* Confetti Particle Canvas */}
       <ConfettiCanvas ref={confettiRef} />
 
+      {/* Animated Stethoscope Page Transition Loader */}
+      <StethoscopeLoader visible={transitioning} />
+
       {/* Navigation & Story Progress */}
       <ChapterNav
         currentChapter={currentChapter}
-        setChapter={(c) => {
-          setCurrentChapter(c);
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        }}
+        setChapter={(c) => navigateToChapter(c)}
         totalChapters={chapterTitles.length}
         chapterTitles={chapterTitles}
         isPlaying={musicActive}
@@ -110,7 +126,11 @@ function App() {
         )}
 
         {currentChapter === 2 && (
-          <Chapter2NurseTribute onNext={handleNext} onPrev={handlePrev} />
+          <Chapter2NurseTribute
+            onNext={handleNext}
+            onPrev={handlePrev}
+            triggerConfetti={triggerConfetti}
+          />
         )}
 
         {currentChapter === 3 && (
@@ -133,8 +153,34 @@ function App() {
 
         {currentChapter === 5 && (
           <Chapter5Wishes
+            onNext={handleNext}
             onRestart={handleRestart}
             onPrev={handlePrev}
+            triggerConfetti={triggerConfetti}
+          />
+        )}
+
+        {currentChapter === 6 && (
+          <Chapter6Keepsake
+            onNext={handleNext}
+            onPrev={handlePrev}
+            triggerConfetti={triggerConfetti}
+          />
+        )}
+
+        {currentChapter === 7 && (
+          <Chapter7Letter
+            onNext={handleNext}
+            onPrev={handlePrev}
+            onRestart={handleRestart}
+            triggerConfetti={triggerConfetti}
+          />
+        )}
+
+        {currentChapter === 8 && (
+          <Chapter8Letter
+            onPrev={handlePrev}
+            onRestart={handleRestart}
             triggerConfetti={triggerConfetti}
           />
         )}

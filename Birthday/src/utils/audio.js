@@ -337,3 +337,235 @@ export function playBalloonPopSound() {
     // Ignore audio context edge cases
   }
 }
+
+// ─────────────────────────────────────────────────────────────
+// Gentle Lullaby Music Box for Debalina's Kiddo Mode
+// ─────────────────────────────────────────────────────────────
+let isPlayingLullaby = false;
+let lullabyInterval = null;
+
+// Lullaby melody: warm, slow, dreamy
+const LULLABY_NOTES = [
+  { note: 'G4', dur: 1.2 }, { note: 'E4', dur: 1.2 }, { note: 'C4', dur: 2.0 },
+  { note: 'G4', dur: 1.2 }, { note: 'E4', dur: 1.2 }, { note: 'C4', dur: 2.0 },
+  { note: 'A4', dur: 1.2 }, { note: 'F4', dur: 1.2 }, { note: 'D4', dur: 2.0 },
+  { note: 'G4', dur: 1.0 }, { note: 'F4', dur: 0.8 }, { note: 'E4', dur: 1.0 }, { note: 'D4', dur: 1.0 }, { note: 'C4', dur: 2.5 },
+  // Birthday chime variation
+  { note: 'C4', dur: 1.0 }, { note: 'E4', dur: 1.0 }, { note: 'G4', dur: 1.2 }, { note: 'E4', dur: 1.2 },
+  { note: 'F4', dur: 1.0 }, { note: 'D4', dur: 1.0 }, { note: 'G4', dur: 1.5 },
+  { note: 'C5', dur: 1.5 }, { note: 'G4', dur: 1.0 }, { note: 'E4', dur: 1.2 }, { note: 'D4', dur: 1.0 }, { note: 'C4', dur: 3.0 },
+];
+
+export function startLullabyMusic(onStateChange) {
+  const ctx = getAudioContext();
+  if (!ctx) return;
+
+  if (isPlayingLullaby) return;
+  // If birthday melody is playing, pause it for lullaby
+  if (isPlayingSong) {
+    stopBdayMusic();
+  }
+
+  isPlayingLullaby = true;
+  if (onStateChange) onStateChange(true);
+
+  const tempo = 0.75; // very slow, soothing beat
+
+  function scheduleLullaby() {
+    if (!isPlayingLullaby) return;
+    const now = ctx.currentTime + 0.05;
+    let timeOffset = 0;
+
+    LULLABY_NOTES.forEach((item) => {
+      const freq = NOTES[item.note];
+      if (freq) {
+        // Soft sine wave music box chime
+        playMusicBoxNote(freq, now + timeOffset, item.dur * tempo * 1.5, 0.11);
+        // Soft harmonic octave overtone
+        if (item.dur >= 1.2) {
+          playMusicBoxNote(freq * 0.5, now + timeOffset, 1.8, 0.05);
+        }
+      }
+      timeOffset += item.dur * tempo;
+    });
+
+    const totalDuration = timeOffset * 1000 + 1500;
+    lullabyInterval = setTimeout(() => {
+      if (isPlayingLullaby) {
+        scheduleLullaby();
+      }
+    }, totalDuration);
+  }
+
+  scheduleLullaby();
+}
+
+export function stopLullabyMusic(onStateChange) {
+  isPlayingLullaby = false;
+  if (lullabyInterval) {
+    clearTimeout(lullabyInterval);
+    lullabyInterval = null;
+  }
+  if (onStateChange) onStateChange(false);
+}
+
+export function toggleLullabyMusic(onStateChange) {
+  if (isPlayingLullaby) {
+    stopLullabyMusic(onStateChange);
+  } else {
+    startLullabyMusic(onStateChange);
+  }
+}
+
+export function isLullabyActive() {
+  return isPlayingLullaby;
+}
+
+// ─────────────────────────────────────────────────────────────
+// Sound Effects for New Interactive Features
+// ─────────────────────────────────────────────────────────────
+
+// Bottle / Pill Vial Pop Sound for First-Aid Kit
+export function playBottlePopSound() {
+  const ctx = getAudioContext();
+  if (!ctx) return;
+
+  const now = ctx.currentTime;
+  const osc = ctx.createOscillator();
+  const gain = ctx.createGain();
+
+  osc.type = 'sine';
+  osc.frequency.setValueAtTime(320, now);
+  osc.frequency.exponentialRampToValueAtTime(800, now + 0.06);
+  osc.frequency.exponentialRampToValueAtTime(200, now + 0.12);
+
+  gain.gain.setValueAtTime(0.001, now);
+  gain.gain.linearRampToValueAtTime(0.25, now + 0.02);
+  gain.gain.exponentialRampToValueAtTime(0.001, now + 0.14);
+
+  osc.connect(gain);
+  gain.connect(ctx.destination);
+
+  osc.start(now);
+  osc.stop(now + 0.15);
+
+  setTimeout(() => {
+    playMusicBoxNote(1046.5, ctx.currentTime, 0.4, 0.12);
+  }, 70);
+}
+
+// Camera Shutter Click for Sticker Booth
+export function playCameraClickSound() {
+  const ctx = getAudioContext();
+  if (!ctx) return;
+
+  const now = ctx.currentTime;
+  const bufferSize = Math.floor(ctx.sampleRate * 0.06);
+  const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+  const data = buffer.getChannelData(0);
+
+  for (let i = 0; i < bufferSize; i++) {
+    data[i] = (Math.random() * 2 - 1) * 0.35;
+  }
+
+  const noise = ctx.createBufferSource();
+  noise.buffer = buffer;
+
+  const filter = ctx.createBiquadFilter();
+  filter.type = 'highpass';
+  filter.frequency.setValueAtTime(1800, now);
+
+  const gain = ctx.createGain();
+  gain.gain.setValueAtTime(0.28, now);
+  gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+
+  noise.connect(filter);
+  filter.connect(gain);
+  gain.connect(ctx.destination);
+
+  noise.start(now);
+  noise.stop(now + 0.06);
+
+  // Soft sparkle flash chime
+  setTimeout(() => {
+    playMusicBoxNote(1318.5, ctx.currentTime, 0.5, 0.14);
+  }, 80);
+}
+
+// Badge Flip Chime
+export function playBadgeFlipSound() {
+  const ctx = getAudioContext();
+  if (!ctx) return;
+
+  const now = ctx.currentTime;
+  playMusicBoxNote(587.33, now, 0.3, 0.1);
+  playMusicBoxNote(880, now + 0.06, 0.35, 0.12);
+  playMusicBoxNote(1174.66, now + 0.12, 0.4, 0.14);
+}
+
+// Firework Launch Whoosh & Sparkle Explosion (Lightweight & Throttled)
+let lastFireworkSoundTime = 0;
+
+export function playFireworkSound() {
+  try {
+    const nowMs = Date.now();
+    if (nowMs - lastFireworkSoundTime < 200) {
+      return; // Skip audio node congestion when rapid fireworks burst
+    }
+    lastFireworkSoundTime = nowMs;
+
+    const ctx = getAudioContext();
+    if (!ctx) return;
+
+    const now = ctx.currentTime;
+
+    // 1. Launch whistle
+    const whistle = ctx.createOscillator();
+    const whistleGain = ctx.createGain();
+
+    whistle.type = 'sine';
+    whistle.frequency.setValueAtTime(350, now);
+    whistle.frequency.exponentialRampToValueAtTime(1200, now + 0.32);
+
+    whistleGain.gain.setValueAtTime(0.01, now);
+    whistleGain.gain.linearRampToValueAtTime(0.08, now + 0.08);
+    whistleGain.gain.exponentialRampToValueAtTime(0.001, now + 0.32);
+
+    whistle.connect(whistleGain);
+    whistleGain.connect(ctx.destination);
+
+    whistle.start(now);
+    whistle.stop(now + 0.32);
+
+    // 2. Explosion boom + soft sparkle chime
+    setTimeout(() => {
+      try {
+        if (!ctx || ctx.state === 'closed') return;
+        const burstNow = ctx.currentTime;
+        const boomOsc = ctx.createOscillator();
+        const boomGain = ctx.createGain();
+
+        boomOsc.type = 'triangle';
+        boomOsc.frequency.setValueAtTime(150, burstNow);
+        boomOsc.frequency.exponentialRampToValueAtTime(45, burstNow + 0.28);
+
+        boomGain.gain.setValueAtTime(0.22, burstNow);
+        boomGain.gain.exponentialRampToValueAtTime(0.001, burstNow + 0.3);
+
+        boomOsc.connect(boomGain);
+        boomGain.connect(ctx.destination);
+
+        boomOsc.start(burstNow);
+        boomOsc.stop(burstNow + 0.3);
+
+        // Soft sparkle tones
+        playMusicBoxNote(880, burstNow + 0.04, 0.4, 0.08);
+        playMusicBoxNote(1318.5, burstNow + 0.1, 0.5, 0.09);
+      } catch (err) {
+        // Safe audio fallback
+      }
+    }, 300);
+  } catch (err) {
+    // Non-blocking catch
+  }
+}

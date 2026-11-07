@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { playCakeSliceSound, startBdayMusic, playSparkleSound } from '../utils/audio';
 import PhotoFrame from './PhotoFrame';
+import img3 from '../assets/Deb/img3.jpg';
 
 const Chapter4CakeCut = ({ onNext, onPrev, triggerConfetti, triggerRain, onStartMusic }) => {
   const [isCut, setIsCut] = useState(false);
@@ -76,6 +77,7 @@ const Chapter4CakeCut = ({ onNext, onPrev, triggerConfetti, triggerRain, onStart
             subtitle="Debalina • 8th Nov Celebrations"
             placeholderIcon="🎂"
             placeholderGradient="linear-gradient(135deg, #ffeaa7, #fab1a0)"
+            defaultImage={img3}
             rotation={-3}
             size="medium"
           />

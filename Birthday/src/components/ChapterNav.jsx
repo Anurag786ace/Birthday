@@ -1,4 +1,5 @@
 import { playSparkleSound } from '../utils/audio';
+import ThemeToggle from './ThemeToggle';
 
 const ChapterNav = ({
   currentChapter,
@@ -40,6 +41,7 @@ const ChapterNav = ({
         </nav>
 
         <div className="nav-actions">
+          <ThemeToggle />
           <button
             className={`music-toggle-btn ${isPlaying ? 'playing' : ''}`}
             onClick={toggleMusic}
